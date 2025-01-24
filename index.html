@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phasmophobia Ghosts Table</title>
     <style>
 body {
@@ -13,77 +12,97 @@ body {
     margin: 0;
     padding: 20px;
     display: flex;
-    flex-direction: column; /* Change from row to column */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    gap: 20px; /* Add spacing between elements */
+    gap: 20px;
 }
 
-        h1 {
-            text-align: center;
-            font-weight: 300;
-            margin-bottom: 20px;
-            color: #0ff;
-            text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
-        }
-        .table-container {
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 15px;
-            padding: 20px;
-            max-width: 90%;
-            overflow-x: auto;
-            box-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0;
-            font-size: 14px; /* Reduce font size for better visibility on mobile */
-        }
-        th, td {
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 8px 10px; /* Smaller padding for mobile */
-            text-align: left;
-            color: #FFF;
-            word-wrap: break-word; /* Ensure long text wraps properly */
-        }
-        th {
-            background: rgba(0, 255, 255, 0.2);
-            font-weight: bold;
-            position: sticky;
-            top: 0;
-            text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
-        }
-        th.sortable {
-            cursor: pointer;
-        }
-        th.sortable::after {
-            content: " ⇅";
-            font-size: 0.8em;
-            color: #888;
-        }
-        tr:nth-child(even) {
-            background: rgba(0, 255, 255, 0.1);
-        }
-        tr:nth-child(odd) {
-            background: rgba(0, 255, 255, 0.05);
-        }
-        tr:hover {
-            background: rgba(0, 255, 255, 0.2);
-            box-shadow: 0 0 10px #0ff;
-        }
-        @media (max-width: 768px) {
-            table {
-                font-size: 12px; /* Smaller font size for smaller screens */
-            }
-            th, td {
-                padding: 6px 8px; /* Adjust padding for better fit */
-            }
-            .table-container {
-                padding: 10px;
-            }
-        }
+h1 {
+    text-align: center;
+    font-weight: 300;
+    margin-bottom: 20px;
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+}
+
+.table-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 90%;
+    overflow-x: auto;
+    box-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 14px;
+}
+
+th, td {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 10px;
+    text-align: left;
+    color: #FFF;
+    word-wrap: break-word;
+}
+
+th {
+    background: rgba(0, 255, 255, 0.2);
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+}
+
+th.sortable {
+    cursor: pointer;
+}
+
+th.sortable::after {
+    content: " \21D5";
+    font-size: 0.8em;
+    color: #888;
+}
+
+tr:nth-child(even) {
+    background: rgba(0, 255, 255, 0.1);
+}
+
+tr:nth-child(odd) {
+    background: rgba(0, 255, 255, 0.05);
+}
+
+tr:hover {
+    background: rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 10px #0ff;
+}
+
+.glow-table {
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff;
+    border-radius: 15px;
+    padding: 20px;
+    overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 6px 8px;
+    }
+
+    .table-container, .glow-table {
+        padding: 10px;
+    }
+}
     </style>
     <script>
         function sortTable(columnIndex, isNumeric = false) {
@@ -120,295 +139,294 @@ body {
                 </tr>
             </thead>
             <tbody>
+				<tr>
+					<td>Revenant</td>
+					<td>Extremely fast w/line-of-sight; very slow w/o</td>
+					<td></td>
+					<td>12m</td>
+					<td>Average roam behavior</td>
+					<td>Very fast w/line-of-sight; slow w/o</td>
+					<td>1.6</td>
+					<td>5.0</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>Deogen</td>
+					<td>Always knows player location; very slow near player</td>
+					<td>Spirit Box</td>
+					<td>20m</td>
+					<td>Rarely roams far</td>
+					<td>Fast when far; slow w/proximity</td>
+					<td>1.6</td>
+					<td>3.5</td>
+					<td>40%</td>
+				</tr>
+			
+				<tr>
+					<td>Hantu</td>
+					<td>Faster in cold rooms; visible cold breath during hunts</td>
+					<td>Cold breath</td>
+					<td>12m</td>
+					<td>Frequent roaming to colder areas</td>
+					<td>Faster in cold; normal in warm</td>
+					<td>1.6</td>
+					<td>2.5</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>Raiju</td>
+					<td>Faster near active electronics; increases electronic range</td>
+					<td></td>
+					<td>15m</td>
+					<td>Frequent roaming behavior</td>
+					<td>Faster w/electronics; normal w/o</td>
+					<td>1.6</td>
+					<td>2.5</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>The Mimic</td>
+					<td>Mimics abilities and evidence of other ghosts; orbs accompany</td>
+					<td>Ghost Orbs</td>
+					<td>10m</td>
+					<td>Mimics roaming behaviors</td>
+					<td>Mimics other ghosts</td>
+					<td>1.6</td>
+					<td>2.5</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>The Twins</td>
+					<td>Two entities w/separate actions; simultaneous interactions</td>
+					<td></td>
+					<td>20m</td>
+					<td>High roaming variability</td>
+					<td>Varies between twins</td>
+					<td>1.6</td>
+					<td>2.5</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>Moroi</td>
+					<td>Curses players; weaker when Smudged</td>
+					<td></td>
+					<td>15m</td>
+					<td>Moderate roaming behavior</td>
+					<td>Slow at start; faster over time</td>
+					<td>1.6</td>
+					<td>2.2</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>Banshee</td>
+					<td>Targets one player; special scream on parabolic mic</td>
+					<td>D.O.T.S.</td>
+					<td>15m</td>
+					<td>Less likely to roam when hunting</td>
+					<td>Normal w/o line-of-sight; faster w/sight</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>Demon</td>
+					<td>Hunts more often than others; can hunt at higher sanity</td>
+					<td>Freezing Temps</td>
+					<td>10m</td>
+					<td>Aggressive roaming behavior</td>
+					<td>Normal w/o line-of-sight; fast w/sight</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>70%</td>
+				</tr>
+			
+				<tr>
+					<td>Goryo</td>
+					<td>Only seen on D.O.T.S. through cameras</td>
+					<td>D.O.T.S.</td>
+					<td>15m</td>
+					<td>Minimal roaming behavior</td>
+					<td>Normal</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>Jinn</td>
+					<td>Faster w/electricity; drains sanity w/power ability</td>
+					<td></td>
+					<td>20m</td>
+					<td>Stays near breaker</td>
+					<td>Faster w/power; normal w/o power</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>Mare</td>
+					<td>Prefers darkness; turns off lights often</td>
+					<td></td>
+					<td>10m</td>
+					<td>Roams more in dark areas</td>
+					<td>Normal</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>60%</td>
+				</tr>
+			
+				<tr>
+					<td>Myling</td>
+					<td>Quieter hunting sounds and footsteps</td>
+					<td></td>
+					<td>10m</td>
+					<td>Frequent but quiet roaming</td>
+					<td>Normal; quieter steps</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>Obake</td>
+					<td>Occasionally leaves six-fingered fingerprints</td>
+					<td>Fingerprints</td>
+					<td>12m</td>
+					<td>Rarely roams far</td>
+					<td>Normal</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>Oni</td>
+					<td>More visible during hunts; rarely blinks</td>
+					<td></td>
+					<td>15m</td>
+					<td>Active roaming behavior</td>
+					<td>Normal</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>Onryo</td>
+					<td>Angry if candles are blown out; hunts when candles extinguish</td>
+					<td></td>
+					<td>10m</td>
+					<td>Moderate roaming behavior</td>
+					<td>Normal</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>60%</td>
+				</tr>
+			
+				<tr>
+					<td>Phantom</td>
+					<td>Disappears when taking a photo; weaker sanity drain w/photo</td>
+					<td></td>
+					<td>10m</td>
+					<td>Moderate roaming behavior</td>
+					<td>Normal w/o line-of-sight; average w/sight</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>Poltergeist</td>
+					<td>Throws multiple objects at once</td>
+					<td></td>
+					<td>10m</td>
+					<td>Active but erratic roaming</td>
+					<td>Normal</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>Shade</td>
+					<td>Less active around groups; shy behavior</td>
+					<td></td>
+					<td>10m</td>
+					<td>Rare roaming behavior</td>
+					<td>Normal</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>35%</td>
+				</tr>
+			
+				<tr>
+					<td>Spirit</td>
+					<td>Standard ghost; smudge effect lasts 3 min</td>
+					<td></td>
+					<td>10m</td>
+					<td>Average roaming behavior</td>
+					<td>Normal</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>Thaye</td>
+					<td>Starts aggressive; ages and weakens over time</td>
+					<td></td>
+					<td>15m</td>
+					<td>Frequent when young; slows w/age</td>
+					<td>Fast early; slower w/age</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>75% (young), decreases over time</td>
+				</tr>
+			
+				<tr>
+					<td>Wraith</td>
+					<td>Rarely leaves footprints; no UV footprints in salt</td>
+					<td>Spirit Box</td>
+					<td>12m</td>
+					<td>Unpredictable roaming behavior</td>
+					<td>Normal</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>50%</td>
+				</tr>
+			
+				<tr>
+					<td>Yokai</td>
+					<td>Hunts more when talking nearby</td>
+					<td></td>
+					<td>15m</td>
+					<td>Moderate roaming behavior</td>
+					<td>Normal</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>80% (near voice)</td>
+				</tr>
+			
+				<tr>
+					<td>Yurei</td>
+					<td>Drains sanity faster when close; slams doors after Smudge</td>
+					<td></td>
+					<td>15m</td>
+					<td>Less roaming after Smudge</td>
+					<td>Normal</td>
+					<td>1.6</td>
+					<td>1.6</td>
+					<td>50%</td>
+				</tr>
 
-        <tr>
-            <td>Revenant</td>
-            <td>Extremely fast w/line-of-sight; very slow w/o</td>
-            <td></td>
-            <td>12m</td>
-            <td>Average roam behavior</td>
-            <td>Very fast w/line-of-sight; slow w/o</td>
-            <td>1.6</td>
-            <td>5.0</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>Deogen</td>
-            <td>Always knows player location; very slow near player</td>
-            <td>Spirit Box</td>
-            <td>20m</td>
-            <td>Rarely roams far</td>
-            <td>Fast when far; slow w/proximity</td>
-            <td>1.6</td>
-            <td>3.5</td>
-            <td>40%</td>
-        </tr>
-    
-        <tr>
-            <td>Hantu</td>
-            <td>Faster in cold rooms; visible cold breath during hunts</td>
-            <td>Cold breath</td>
-            <td>12m</td>
-            <td>Frequent roaming to colder areas</td>
-            <td>Faster in cold; normal in warm</td>
-            <td>1.6</td>
-            <td>2.5</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>Raiju</td>
-            <td>Faster near active electronics; increases electronic range</td>
-            <td></td>
-            <td>15m</td>
-            <td>Frequent roaming behavior</td>
-            <td>Faster w/electronics; normal w/o</td>
-            <td>1.6</td>
-            <td>2.5</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>The Mimic</td>
-            <td>Mimics abilities and evidence of other ghosts; orbs accompany</td>
-            <td>Ghost Orbs</td>
-            <td>10m</td>
-            <td>Mimics roaming behaviors</td>
-            <td>Mimics other ghosts</td>
-            <td>1.6</td>
-            <td>2.5</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>The Twins</td>
-            <td>Two entities w/separate actions; simultaneous interactions</td>
-            <td></td>
-            <td>20m</td>
-            <td>High roaming variability</td>
-            <td>Varies between twins</td>
-            <td>1.6</td>
-            <td>2.5</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>Moroi</td>
-            <td>Curses players; weaker when Smudged</td>
-            <td></td>
-            <td>15m</td>
-            <td>Moderate roaming behavior</td>
-            <td>Slow at start; faster over time</td>
-            <td>1.6</td>
-            <td>2.2</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>Banshee</td>
-            <td>Targets one player; special scream on parabolic mic</td>
-            <td>D.O.T.S.</td>
-            <td>15m</td>
-            <td>Less likely to roam when hunting</td>
-            <td>Normal w/o line-of-sight; faster w/sight</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>Demon</td>
-            <td>Hunts more often than others; can hunt at higher sanity</td>
-            <td>Freezing Temps</td>
-            <td>10m</td>
-            <td>Aggressive roaming behavior</td>
-            <td>Normal w/o line-of-sight; fast w/sight</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>70%</td>
-        </tr>
-    
-        <tr>
-            <td>Goryo</td>
-            <td>Only seen on D.O.T.S. through cameras</td>
-            <td>D.O.T.S.</td>
-            <td>15m</td>
-            <td>Minimal roaming behavior</td>
-            <td>Normal</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>Jinn</td>
-            <td>Faster w/electricity; drains sanity w/power ability</td>
-            <td></td>
-            <td>20m</td>
-            <td>Stays near breaker</td>
-            <td>Faster w/power; normal w/o power</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>Mare</td>
-            <td>Prefers darkness; turns off lights often</td>
-            <td></td>
-            <td>10m</td>
-            <td>Roams more in dark areas</td>
-            <td>Normal</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>60%</td>
-        </tr>
-    
-        <tr>
-            <td>Myling</td>
-            <td>Quieter hunting sounds and footsteps</td>
-            <td></td>
-            <td>10m</td>
-            <td>Frequent but quiet roaming</td>
-            <td>Normal; quieter steps</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>Obake</td>
-            <td>Occasionally leaves six-fingered fingerprints</td>
-            <td>Fingerprints</td>
-            <td>12m</td>
-            <td>Rarely roams far</td>
-            <td>Normal</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>Oni</td>
-            <td>More visible during hunts; rarely blinks</td>
-            <td></td>
-            <td>15m</td>
-            <td>Active roaming behavior</td>
-            <td>Normal</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>Onryo</td>
-            <td>Angry if candles are blown out; hunts when candles extinguish</td>
-            <td></td>
-            <td>10m</td>
-            <td>Moderate roaming behavior</td>
-            <td>Normal</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>60%</td>
-        </tr>
-    
-        <tr>
-            <td>Phantom</td>
-            <td>Disappears when taking a photo; weaker sanity drain w/photo</td>
-            <td></td>
-            <td>10m</td>
-            <td>Moderate roaming behavior</td>
-            <td>Normal w/o line-of-sight; average w/sight</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>Poltergeist</td>
-            <td>Throws multiple objects at once</td>
-            <td></td>
-            <td>10m</td>
-            <td>Active but erratic roaming</td>
-            <td>Normal</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>Shade</td>
-            <td>Less active around groups; shy behavior</td>
-            <td></td>
-            <td>10m</td>
-            <td>Rare roaming behavior</td>
-            <td>Normal</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>35%</td>
-        </tr>
-    
-        <tr>
-            <td>Spirit</td>
-            <td>Standard ghost; smudge effect lasts 3 min</td>
-            <td></td>
-            <td>10m</td>
-            <td>Average roaming behavior</td>
-            <td>Normal</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>Thaye</td>
-            <td>Starts aggressive; ages and weakens over time</td>
-            <td></td>
-            <td>15m</td>
-            <td>Frequent when young; slows w/age</td>
-            <td>Fast early; slower w/age</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>75% (young), decreases over time</td>
-        </tr>
-    
-        <tr>
-            <td>Wraith</td>
-            <td>Rarely leaves footprints; no UV footprints in salt</td>
-            <td>Spirit Box</td>
-            <td>12m</td>
-            <td>Unpredictable roaming behavior</td>
-            <td>Normal</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>50%</td>
-        </tr>
-    
-        <tr>
-            <td>Yokai</td>
-            <td>Hunts more when talking nearby</td>
-            <td></td>
-            <td>15m</td>
-            <td>Moderate roaming behavior</td>
-            <td>Normal</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>80% (near voice)</td>
-        </tr>
-    
-        <tr>
-            <td>Yurei</td>
-            <td>Drains sanity faster when close; slams doors after Smudge</td>
-            <td></td>
-            <td>15m</td>
-            <td>Less roaming after Smudge</td>
-            <td>Normal</td>
-            <td>1.6</td>
-            <td>1.6</td>
-            <td>50%</td>
-        </tr>
-    
             </tbody>
         </table>
     </div>
@@ -418,153 +436,157 @@ body {
 </br>
 </br>
 </br>
-<table>
-    <thead>
-        <tr>
-            <th>Map</th>
-            <th>Ouija Board</th>
-            <th>Music Box</th>
-            <th>Summoning Circle</th>
-            <th>Tarot Cards</th>
-            <th>Haunted Mirror</th>
-            <th>Voodoo Doll</th>
-            <th>Monkey Paw</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>6 Tanglewood Drive</td>
-            <td>Basement: On a table.</td>
-            <td>Nursery: On a shelf.</td>
-            <td>Basement: In the center.</td>
-            <td>Living Room: End table.</td>
-            <td>Master Bedroom: Hanging on wall.</td>
-            <td>Garage: On trashcan.</td>
-            <td>Living Room: Glass case.</td>
-        </tr>
-        <tr>
-            <td>42 Edgefield Road</td>
-            <td>Utility Room: On floor.</td>
-            <td>Living Room: Dresser.</td>
-            <td>Basement: Center.</td>
-            <td>Entrance: Table by door.</td>
-            <td>Hallway: Stairs wall.</td>
-            <td>2nd Floor: Blue Bedroom bed.</td>
-            <td>Orange Bedroom: On desk.</td>
-        </tr>
-        <tr>
-            <td>10 Ridgeview Court</td>
-            <td>Utility Closet: On floor.</td>
-            <td>Girl's Bedroom: Near door.</td>
-            <td>Basement: Behind stairs.</td>
-            <td>Foyer: Near window.</td>
-            <td>Hallway: Behind stairs.</td>
-            <td>Office: Across garage.</td>
-            <td>Boy's Bedroom: White desk.</td>
-        </tr>
-        <tr>
-            <td>Grafton Farmhouse</td>
-            <td>Master Bedroom: Closet.</td>
-            <td>Foyer: Corner near stairs.</td>
-            <td>Storage: Far-left corner.</td>
-            <td>Dining Room: Center.</td>
-            <td>Living Room: Near kitchen.</td>
-            <td>Nursery: Shelf near crib.</td>
-            <td>Living Room: Display case.</td>
-        </tr>
-        <tr>
-            <td>13 Willow Street</td>
-            <td>Garage: Utility closet.</td>
-            <td>Living Room: Far-right corner.</td>
-            <td>Basement: Hallway.</td>
-            <td>Living Room: Middle.</td>
-            <td>Garage: Utility closet.</td>
-            <td>Boy's Bedroom: Far-left corner.</td>
-            <td>Garage: Near shelf.</td>
-        </tr>
-        <tr>
-            <td>Point Hope</td>
-            <td>Main Hall: Near fireplace.</td>
-            <td>Library: On the desk.</td>
-            <td>Storage: Center.</td>
-            <td>Dining Hall: Corner.</td>
-            <td>Upstairs Hallway: End table.</td>
-            <td>Basement: Next to barrels.</td>
-            <td>Parlor: On shelf.</td>
-        </tr>
-        <tr>
-            <td>Maple Lodge Campsite</td>
-            <td>Main Cabin: Kitchen table.</td>
-            <td>Campfire: Log seat.</td>
-            <td>Picnic Area: Near the tables.</td>
-            <td>Main Cabin: Desk.</td>
-            <td>Restroom: Near mirror.</td>
-            <td>Cabin Loft: Shelf.</td>
-            <td>Reception: Glass case.</td>
-        </tr>
-        <tr>
-            <td>Camp Woodwind</td>
-            <td>Storage Tent: Corner.</td>
-            <td>Picnic Table: Near fire pit.</td>
-            <td>Central Area: By the logs.</td>
-            <td>Yellow Tent: On chair.</td>
-            <td>Blue Tent: By mirror.</td>
-            <td>Green Tent: Corner shelf.</td>
-            <td>Red Tent: On crate.</td>
-        </tr>
-        <tr>
-            <td>Brownstone Highschool</td>
-            <td>Library: Near desk.</td>
-            <td>Cafeteria: Center table.</td>
-            <td>Gym: Near bleachers.</td>
-            <td>Hallway: By lockers.</td>
-            <td>Principal's Office: Wall mirror.</td>
-            <td>Art Room: Near sink.</td>
-            <td>Entrance Hall: By trophy case.</td>
-        </tr>
-        <tr>
-            <td>Bleasdale Farmhouse</td>
-            <td>Workshop: On bench.</td>
-            <td>Living Room: Small table.</td>
-            <td>Attic: Near boxes.</td>
-            <td>Office: Desk.</td>
-            <td>Office: Wall lamp.</td>
-            <td>Upstairs Hallway: Between rooms.</td>
-            <td>Master Bedroom: On chest.</td>
-        </tr>
-        <tr>
-            <td>Sunny Meadows</td>
-            <td>Main Hall: Near altar.</td>
-            <td>Chapel: Pews.</td>
-            <td>Basement: Ritual room.</td>
-            <td>Lobby: Reception desk.</td>
-            <td>Hospital Wing: Wall mirror.</td>
-            <td>Morgue: Corner shelf.</td>
-            <td>Basement: On desk.</td>
-        </tr>
-        <tr>
-            <td>Sunny Meadows (Restricted)</td>
-            <td>Lobby: Reception corner.</td>
-            <td>Office: Near door.</td>
-            <td>Basement: Center room.</td>
-            <td>Hospital Wing: Bedside table.</td>
-            <td>Chapel: Wall mirror.</td>
-            <td>Office: Behind desk.</td>
-            <td>Morgue: Storage area.</td>
-        </tr>
-        <tr>
-            <td>Prison</td>
-            <td>Warden's Office: By desk.</td>
-            <td>Entrance: Security desk.</td>
-            <td>Cafeteria: Near tables.</td>
-            <td>Library: Center desk.</td>
-            <td>Cell Block A: Wall mirror.</td>
-            <td>Infirmary: Corner cabinet.</td>
-            <td>Visitation Room: Near benches.</td>
-        </tr>
-    </tbody>
-</table>
-
-
+</br>
+</br>
+</br>
+</br>
+    <div class="glow-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Map</th>
+                    <th>Ouija Board</th>
+                    <th>Music Box</th>
+                    <th>Summoning Circle</th>
+                    <th>Tarot Cards</th>
+                    <th>Haunted Mirror</th>
+                    <th>Voodoo Doll</th>
+                    <th>Monkey Paw</th>
+                </tr>
+            </thead>
+            <tbody>
+			<tr>
+				<td>6 Tanglewood Drive</td>
+				<td>Basement: On a table.</td>
+				<td>Nursery: On a shelf.</td>
+				<td>Basement: In the center.</td>
+				<td>Living Room: End table.</td>
+				<td>Master Bedroom: Hanging on wall.</td>
+				<td>Garage: On trashcan.</td>
+				<td>Living Room: Glass case.</td>
+			</tr>
+			<tr>
+				<td>42 Edgefield Road</td>
+				<td>Utility Room: On floor.</td>
+				<td>Living Room: Dresser.</td>
+				<td>Basement: Center.</td>
+				<td>Entrance: Table by door.</td>
+				<td>Hallway: Stairs wall.</td>
+				<td>2nd Floor: Blue Bedroom bed.</td>
+				<td>Orange Bedroom: On desk.</td>
+			</tr>
+			<tr>
+				<td>10 Ridgeview Court</td>
+				<td>Utility Closet: On floor.</td>
+				<td>Girl's Bedroom: Near door.</td>
+				<td>Basement: Behind stairs.</td>
+				<td>Foyer: Near window.</td>
+				<td>Hallway: Behind stairs.</td>
+				<td>Office: Across garage.</td>
+				<td>Boy's Bedroom: White desk.</td>
+			</tr>
+			<tr>
+				<td>Grafton Farmhouse</td>
+				<td>Master Bedroom: Closet.</td>
+				<td>Foyer: Corner near stairs.</td>
+				<td>Storage: Far-left corner.</td>
+				<td>Dining Room: Center.</td>
+				<td>Living Room: Near kitchen.</td>
+				<td>Nursery: Shelf near crib.</td>
+				<td>Living Room: Display case.</td>
+			</tr>
+			<tr>
+				<td>13 Willow Street</td>
+				<td>Garage: Utility closet.</td>
+				<td>Living Room: Far-right corner.</td>
+				<td>Basement: Hallway.</td>
+				<td>Living Room: Middle.</td>
+				<td>Garage: Utility closet.</td>
+				<td>Boy's Bedroom: Far-left corner.</td>
+				<td>Garage: Near shelf.</td>
+			</tr>
+			<tr>
+				<td>Point Hope</td>
+				<td>Main Hall: Near fireplace.</td>
+				<td>Library: On the desk.</td>
+				<td>Storage: Center.</td>
+				<td>Dining Hall: Corner.</td>
+				<td>Upstairs Hallway: End table.</td>
+				<td>Basement: Next to barrels.</td>
+				<td>Parlor: On shelf.</td>
+			</tr>
+			<tr>
+				<td>Maple Lodge Campsite</td>
+				<td>Main Cabin: Kitchen table.</td>
+				<td>Campfire: Log seat.</td>
+				<td>Picnic Area: Near the tables.</td>
+				<td>Main Cabin: Desk.</td>
+				<td>Restroom: Near mirror.</td>
+				<td>Cabin Loft: Shelf.</td>
+				<td>Reception: Glass case.</td>
+			</tr>
+			<tr>
+				<td>Camp Woodwind</td>
+				<td>Storage Tent: Corner.</td>
+				<td>Picnic Table: Near fire pit.</td>
+				<td>Central Area: By the logs.</td>
+				<td>Yellow Tent: On chair.</td>
+				<td>Blue Tent: By mirror.</td>
+				<td>Green Tent: Corner shelf.</td>
+				<td>Red Tent: On crate.</td>
+			</tr>
+			<tr>
+				<td>Brownstone Highschool</td>
+				<td>Library: Near desk.</td>
+				<td>Cafeteria: Center table.</td>
+				<td>Gym: Near bleachers.</td>
+				<td>Hallway: By lockers.</td>
+				<td>Principal's Office: Wall mirror.</td>
+				<td>Art Room: Near sink.</td>
+				<td>Entrance Hall: By trophy case.</td>
+			</tr>
+			<tr>
+				<td>Bleasdale Farmhouse</td>
+				<td>Workshop: On bench.</td>
+				<td>Living Room: Small table.</td>
+				<td>Attic: Near boxes.</td>
+				<td>Office: Desk.</td>
+				<td>Office: Wall lamp.</td>
+				<td>Upstairs Hallway: Between rooms.</td>
+				<td>Master Bedroom: On chest.</td>
+			</tr>
+			<tr>
+				<td>Sunny Meadows</td>
+				<td>Main Hall: Near altar.</td>
+				<td>Chapel: Pews.</td>
+				<td>Basement: Ritual room.</td>
+				<td>Lobby: Reception desk.</td>
+				<td>Hospital Wing: Wall mirror.</td>
+				<td>Morgue: Corner shelf.</td>
+				<td>Basement: On desk.</td>
+			</tr>
+			<tr>
+				<td>Sunny Meadows (Restricted)</td>
+				<td>Lobby: Reception corner.</td>
+				<td>Office: Near door.</td>
+				<td>Basement: Center room.</td>
+				<td>Hospital Wing: Bedside table.</td>
+				<td>Chapel: Wall mirror.</td>
+				<td>Office: Behind desk.</td>
+				<td>Morgue: Storage area.</td>
+			</tr>
+			<tr>
+				<td>Prison</td>
+				<td>Warden's Office: By desk.</td>
+				<td>Entrance: Security desk.</td>
+				<td>Cafeteria: Near tables.</td>
+				<td>Library: Center desk.</td>
+				<td>Cell Block A: Wall mirror.</td>
+				<td>Infirmary: Corner cabinet.</td>
+				<td>Visitation Room: Near benches.</td>
+			</tr>
+				</tbody>
+        </table>
+    </div>
 </body>
 </html>
