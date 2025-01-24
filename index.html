@@ -6,7 +6,7 @@
     <title>Phasmophobia Ghosts Table</title>
     <style>
 body {
-    background-color: #000;
+    background: linear-gradient(to bottom, #000428, #004e92);
     color: #FFF;
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -17,6 +17,7 @@ body {
     align-items: center;
     min-height: 100vh;
     gap: 20px;
+    background-attachment: fixed;
 }
 
 h1 {
@@ -90,6 +91,18 @@ tr:hover {
     overflow-x: auto;
 }
 
+.glow-table table {
+    width: 100%;
+    table-layout: auto;
+}
+
+.glow-table td:first-child, .table-container td:first-child {
+    position: sticky;
+    left: 0;
+    background-color: rgba(0, 255, 255, 0.1);
+    z-index: 1;
+}
+
 @media (max-width: 768px) {
     table {
         font-size: 12px;
@@ -101,6 +114,10 @@ tr:hover {
 
     .table-container, .glow-table {
         padding: 10px;
+    }
+
+    .glow-table td, .table-container td {
+        font-size: 10px;
     }
 }
     </style>
@@ -123,7 +140,7 @@ tr:hover {
 </head>
 <body>
     <div class="table-container">
-        <h1>Phasmophobia Ghosts Table</h1>
+        <h1>Ghosts Table</h1>
         <table>
             <thead>
                 <tr>
@@ -139,7 +156,18 @@ tr:hover {
                 </tr>
             </thead>
             <tbody>
-				<tr>
+                <tr>
+                    <td>Revenant</td>
+                    <td>Extremely fast w/line-of-sight; very slow w/o</td>
+                    <td></td>
+                    <td>12m</td>
+                    <td>Average roam behavior</td>
+                    <td>Very fast w/line-of-sight; slow w/o</td>
+                    <td>1.6</td>
+                    <td>5.0</td>
+                    <td>50%</td>
+                </tr>
+                <tr>
 					<td>Revenant</td>
 					<td>Extremely fast w/line-of-sight; very slow w/o</td>
 					<td></td>
@@ -426,21 +454,12 @@ tr:hover {
 					<td>1.6</td>
 					<td>50%</td>
 				</tr>
-
             </tbody>
         </table>
     </div>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
+
     <div class="glow-table">
+      <h1>Cursed Items</h1>
         <table>
             <thead>
                 <tr>
@@ -455,7 +474,7 @@ tr:hover {
                 </tr>
             </thead>
             <tbody>
-			<tr>
+                <tr>
 				<td>6 Tanglewood Drive</td>
 				<td>Basement: On a table.</td>
 				<td>Nursery: On a shelf.</td>
@@ -585,7 +604,7 @@ tr:hover {
 				<td>Infirmary: Corner cabinet.</td>
 				<td>Visitation Room: Near benches.</td>
 			</tr>
-				</tbody>
+            </tbody>
         </table>
     </div>
 </body>
