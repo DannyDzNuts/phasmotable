@@ -17,7 +17,7 @@ body {
     align-items: center;
     min-height: 100vh;
     gap: 20px;
-    overflow: hidden;
+    overflow-y: auto;
     position: relative;
 }
 
@@ -51,17 +51,6 @@ body {
     }
 }
 
-.fog-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background: transparent;
-    z-index: 1;
-}
-
 h1 {
     text-align: center;
     font-weight: 300;
@@ -72,7 +61,7 @@ h1 {
 }
 
 .table-container {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #000; /* Solid black background for tables */
     border-radius: 15px;
     padding: 20px;
     max-width: 90%;
@@ -128,7 +117,7 @@ tr:hover {
 }
 
 .glow-table {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #000; /* Solid black background for tables */
     box-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff;
     border-radius: 15px;
     padding: 20px;
@@ -171,7 +160,6 @@ tr:hover {
     <div class="stars">
         <!-- Stars dynamically added through script -->
     </div>
-    <div class="fog-overlay"></div>
     <div class="table-container">
         <h1>Ghosts Table</h1>
         <table>
@@ -189,7 +177,7 @@ tr:hover {
                 </tr>
             </thead>
             <tbody>
-                                <tr>
+                <tr>
 					<td>Revenant</td>
 					<td>Extremely fast w/line-of-sight; very slow w/o</td>
 					<td></td>
@@ -479,7 +467,7 @@ tr:hover {
             </tbody>
         </table>
     </div>
-
+<br><br><br><br><br><br><br><br><br><br>
     <div class="glow-table">
       <h1>Cursed Items</h1>
         <table>
@@ -496,8 +484,7 @@ tr:hover {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-				<td>6 Tanglewood Drive</td>
+                <td>6 Tanglewood Drive</td>
 				<td>Basement: On a table.</td>
 				<td>Nursery: On a shelf.</td>
 				<td>Basement: In the center.</td>
