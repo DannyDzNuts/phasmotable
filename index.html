@@ -6,7 +6,7 @@
     <title>Phasmophobia Ghosts Table</title>
     <style>
 body {
-    background: linear-gradient(to bottom, #000428, #004e92);
+    background: #000; /* Solid black background */
     color: #FFF;
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -17,7 +17,49 @@ body {
     align-items: center;
     min-height: 100vh;
     gap: 20px;
-    background-attachment: fixed;
+    overflow: hidden;
+    position: relative;
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: transparent;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    animation: flicker 3s infinite alternate;
+    opacity: 0;
+}
+
+@keyframes flicker {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.fog-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: transparent;
+    z-index: 1;
 }
 
 h1 {
@@ -26,6 +68,7 @@ h1 {
     margin-bottom: 20px;
     color: #0ff;
     text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+    z-index: 2;
 }
 
 .table-container {
@@ -35,6 +78,7 @@ h1 {
     max-width: 90%;
     overflow-x: auto;
     box-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff;
+    z-index: 2;
 }
 
 table {
@@ -89,6 +133,7 @@ tr:hover {
     border-radius: 15px;
     padding: 20px;
     overflow-x: auto;
+    z-index: 2;
 }
 
 .glow-table table {
@@ -121,24 +166,12 @@ tr:hover {
     }
 }
     </style>
-    <script>
-        function sortTable(columnIndex, isNumeric = false) {
-            const table = document.querySelector("table tbody");
-            const rows = Array.from(table.querySelectorAll("tr"));
-            rows.sort((rowA, rowB) => {
-                let cellA = rowA.children[columnIndex].textContent.trim();
-                let cellB = rowB.children[columnIndex].textContent.trim();
-                if (isNumeric) {
-                    cellA = parseFloat(cellA.replace(/[^\d.-]/g, "")) || 0;
-                    cellB = parseFloat(cellB.replace(/[^\d.-]/g, "")) || 0;
-                }
-                return cellA > cellB ? 1 : -1;
-            });
-            rows.forEach(row => table.appendChild(row));
-        }
-    </script>
 </head>
 <body>
+    <div class="stars">
+        <!-- Stars dynamically added through script -->
+    </div>
+    <div class="fog-overlay"></div>
     <div class="table-container">
         <h1>Ghosts Table</h1>
         <table>
@@ -156,18 +189,7 @@ tr:hover {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Revenant</td>
-                    <td>Extremely fast w/line-of-sight; very slow w/o</td>
-                    <td></td>
-                    <td>12m</td>
-                    <td>Average roam behavior</td>
-                    <td>Very fast w/line-of-sight; slow w/o</td>
-                    <td>1.6</td>
-                    <td>5.0</td>
-                    <td>50%</td>
-                </tr>
-                <tr>
+                                <tr>
 					<td>Revenant</td>
 					<td>Extremely fast w/line-of-sight; very slow w/o</td>
 					<td></td>
@@ -457,15 +479,7 @@ tr:hover {
             </tbody>
         </table>
     </div>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
+
     <div class="glow-table">
       <h1>Cursed Items</h1>
         <table>
@@ -615,5 +629,20 @@ tr:hover {
             </tbody>
         </table>
     </div>
+
+<script>
+    // Generate stars dynamically
+    const starsContainer = document.querySelector('.stars');
+    const numberOfStars = 100;
+
+    for (let i = 0; i < numberOfStars; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        starsContainer.appendChild(star);
+    }
+</script>
 </body>
 </html>
