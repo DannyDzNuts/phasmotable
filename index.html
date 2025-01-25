@@ -562,7 +562,7 @@
   <td>Curses players via Spirit Box; speeds up as average sanity drops</td>
   <td>Normal</td>
   <td>Faster w/ lower sanity</td>
-  <td>Spriit Box</td>
+  <td>Spirit Box</td>
   <td>Ghost Writing, Freezing Temperatures, Spirit Box</td>
   <td>1.5m / 3.0m</td>
   <td>1.5 (at max sanity)</td>
@@ -867,41 +867,48 @@
   /************************************************************
    3) GHOSTS TABLE: SEARCH + EVIDENCE FILTER
   ************************************************************/
-  function filterAllGhosts() {
-    const searchInput = document.getElementById("ghostSearch").value.toLowerCase();
-    const table = document.getElementById("ghostTable");
-    const tbody = table.getElementsByTagName("tbody")[0];
-    const rows = tbody.getElementsByTagName("tr");
+function filterAllGhosts() {
+  const searchInput = document.getElementById("ghostSearch").value.toLowerCase();
+  const table = document.getElementById("ghostTable");
+  const tbody = table.getElementsByTagName("tbody")[0];
+  const rows = tbody.getElementsByTagName("tr");
 
-    const checkboxes = document.querySelectorAll(".evidence-boxes input[type='checkbox']");
-    let selectedEvidences = [];
-    checkboxes.forEach(cb => {
-      if (cb.checked) selectedEvidences.push(cb.value.toLowerCase());
-    });
+  // Collect the user-checked evidence from checkboxes
+  const checkboxes = document.querySelectorAll(".evidence-boxes input[type='checkbox']");
+  let selectedEvidences = [];
+  checkboxes.forEach(cb => {
+    if (cb.checked) {
+      selectedEvidences.push(cb.value.toLowerCase());
+    }
+  });
 
-    for (let i=0; i<rows.length; i++) {
-      rows[i].style.display = "";
+  for (let i = 0; i < rows.length; i++) {
+    // Start by showing the row; we’ll hide it if it fails any test
+    rows[i].style.display = "";
 
-      const rowText = rows[i].textContent.toLowerCase();
-      if (searchInput && !rowText.includes(searchInput)) {
+    // 1) Filter by text search
+    const rowText = rows[i].textContent.toLowerCase();
+    if (searchInput && !rowText.includes(searchInput)) {
+      rows[i].style.display = "none";
+      continue; // move to next row
+    }
+
+    // 2) Filter by evidence
+    //    col 4 = forced evidence, col 5 = normal evidence
+    const forcedEvidence = rows[i].getElementsByTagName("td")[4].textContent.toLowerCase();
+    const allEvidence    = rows[i].getElementsByTagName("td")[5].textContent.toLowerCase();
+
+    // For each user-checked evidence, confirm it’s in EITHER forced or normal
+    for (let ev of selectedEvidences) {
+      if (!forcedEvidence.includes(ev) && !allEvidence.includes(ev)) {
+        // This means the row does NOT have the needed evidence in forced or normal
         rows[i].style.display = "none";
-        continue;
-      }
-
-      // forced evidence = col 4, all evidence = col 5
-      const forcedEvidence = rows[i].getElementsByTagName("td")[4].textContent.toLowerCase();
-      const allEvidence = rows[i].getElementsByTagName("td")[5].textContent.toLowerCase();
-      for (let ev of selectedEvidences) {
-        if (!allEvidence.includes(ev)) {
-          rows[i].style.display = "none";
-          break;
-        if (!forcedEvidence.includes(ev)) {
-          rows[i].style.display = "none";
-          break;
-        }
+        break; // no need to check more evidences for this row
       }
     }
   }
+}
+
 
   /************************************************************
    4) SORTING FOR GHOST TABLE
