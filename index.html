@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Enforce portrait orientation on mobile (where supported) -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, orientation=portrait" />
+  <!-- Standard mobile-friendly viewport (no orientation lock) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <meta charset="UTF-8" />
-  <title>Spinning Pentagram + Softer Red Tables (Descending Sort)</title>
+  <title>Spinning Pentagram + Softer Red Tables (Final)</title>
   <style>
     /*****************************************************
      1) DEMONIC BACKGROUND (Spinning Circle + Pentagram)
@@ -14,10 +14,10 @@
       padding: 0;
       width: 100%;
       height: 100%;
-      background: #000; /* black base */
-      overflow: hidden;
+      /* Removed overflow: hidden; so scrollbars can appear if needed */
       font-family: Arial, sans-serif;
       color: #fff;
+      background: #000; 
     }
 
     .symbol-container {
@@ -59,7 +59,7 @@
     }
 
     /*****************************************************
-     2) DRIFTING EMBERS WITH RANDOM SINE WAVE
+     2) DRIFTING EMBERS (Random Sine Wave)
     *****************************************************/
     .embers {
       position: absolute;
@@ -81,12 +81,12 @@
     }
 
     /*****************************************************
-     3) TABLE WRAPPER (NO BORDER AROUND, WIDER FOR LARGE SCREENS)
+     3) TABLE WRAPPER
+       - 80% wide, up to 1200px, no extra border
     *****************************************************/
     .table-wrapper {
       position: relative;
       z-index: 2;
-      /* Use 80% width, up to some max (e.g., 1200px) for large devices */
       width: 80%;
       max-width: 1200px;
       margin: 20px auto;
@@ -102,7 +102,6 @@
       color: #f00;
       text-shadow: 0 0 5px #f00;
     }
-
     .filters {
       text-align: center;
       margin-bottom: 10px;
@@ -141,13 +140,13 @@
       background: rgba(0,0,0,0.3);
     }
     .red-table th, .red-table td {
-      border: none;  /* no rigid borders */
+      border: none;
       padding: 8px 10px;
       text-align: left;
       color: #fff;
     }
     .red-table thead tr {
-      background: #600; /* dark red header row */
+      background: #600; /* dark red */
     }
     .red-table th {
       cursor: pointer;
@@ -157,7 +156,7 @@
       border-radius: 6px;
     }
     .red-table tr:nth-child(even) {
-      background: rgba(200,0,0,0.2); /* brighter red for even rows */
+      background: rgba(200,0,0,0.2); 
     }
     .red-table tr:nth-child(odd) {
       background: rgba(100,0,0,0.2);
@@ -173,11 +172,15 @@
     }
 
     /*****************************************************
-     5) MOBILE-FRIENDLY ADJUSTMENTS
+     5) MOBILE-FRIENDLY 
+       - Larger search boxes (font + padding) 
+       - smaller table text
     *****************************************************/
     @media (max-width: 768px) {
       .search-box input {
         width: 90%;
+        font-size: 16px;  /* bigger for readability */
+        padding: 10px; 
       }
       th, td {
         padding: 6px;
@@ -192,7 +195,7 @@
   <div class="symbol-container">
     <svg id="bloodSymbol" viewBox="0 0 200 200">
       <g class="rotateGroup">
-        <!-- Circle draws first -->
+        <!-- Circle drawn first -->
         <circle
           id="circlePath"
           class="blood-line"
@@ -200,7 +203,7 @@
           cy="100"
           r="90"
         />
-        <!-- Pentagram draws second -->
+        <!-- Pentagram drawn second -->
         <path
           id="starPath"
           class="blood-line"
@@ -220,7 +223,7 @@
 
   <!-- Ghosts Table -->
   <div class="table-wrapper">
-    <h1>Ghost Traits</h1>
+    <h1>Ghosts Table</h1>
     <div class="filters">
       <div class="search-box">
         <input 
@@ -252,27 +255,27 @@
           <th class="sortable" onclick="sortGhostTable(0,false)">Name</th>
           <!-- 1: Unique Trait (text, not sorted) -->
           <th>Unique Trait</th>
-          <!-- 2: Roaming Behavior (text, not sorted) -->
+          <!-- 2: Roaming Behavior -->
           <th>Roaming Behavior</th>
-          <!-- 3: Footstep Speed (text, not sorted) -->
+          <!-- 3: Footstep Speed -->
           <th>Footstep Speed</th>
           <!-- 4: Forced Evidence (text, sortable) -->
           <th class="sortable" onclick="sortGhostTable(4,false)">Forced Evidence</th>
-          <!-- 5: Interaction Range (numeric, e.g. '12m') -->
+          <!-- 5: Interaction Range (numeric) -->
           <th class="sortable" onclick="sortGhostTable(5,true)">Interaction Range</th>
           <!-- 6: Base Speed (numeric) -->
           <th class="sortable" onclick="sortGhostTable(6,true)">Base Speed</th>
           <!-- 7: Speed w/ Modifier (numeric) -->
           <th class="sortable" onclick="sortGhostTable(7,true)">Mod. Speed</th>
-          <!-- 8: Hunt Threshold (numeric, e.g. '50%') -->
+          <!-- 8: Hunt Threshold (numeric) -->
           <th class="sortable" onclick="sortGhostTable(8,true)">Hunt %</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Examples -->
+        <!-- Example data with new columns -->
         <tr>
           <td>Revenant</td>
-          <td>Extremely fast w/LOS, very slow w/o</td>
+          <td>Extremely fast w/LOS, slow w/o</td>
           <td>Average roam</td>
           <td>Fast w/LOS; slow w/o</td>
           <td></td>
@@ -296,7 +299,7 @@
           <td>The Mimic</td>
           <td>Copies other ghosts</td>
           <td>Unpredictable roam</td>
-          <td>Mimics footstep speeds</td>
+          <td>Mimics speeds</td>
           <td>Ghost Orbs</td>
           <td>10m</td>
           <td>1.6</td>
@@ -307,7 +310,7 @@
           <td>Deogen</td>
           <td>Always knows your location; slow near target</td>
           <td>Rarely roams far</td>
-          <td>Fast far away; slow up close</td>
+          <td>Fast far; slow close</td>
           <td>Spirit Box</td>
           <td>20m</td>
           <td>1.6</td>
@@ -320,7 +323,7 @@
 
   <!-- Cursed Items Table -->
   <div class="table-wrapper">
-    <h1>Cursed Item Locations</h1>
+    <h1>Cursed Items Table</h1>
     <div class="search-box" style="text-align:center;">
       <input 
         type="text"
@@ -359,7 +362,7 @@
 
 <script>
   /************************************************************
-   1) DRAW THE CIRCLE THEN THE PENTAGRAM
+   1) DRAW THE CIRCLE, THEN THE PENTAGRAM
   ************************************************************/
   const circlePath = document.getElementById("circlePath");
   const starPath   = document.getElementById("starPath");
@@ -445,7 +448,6 @@
   setInterval(spawnEmber, 700);
   for (let i=0; i<12; i++) spawnEmber();
 
-
   /************************************************************
    3) GHOSTS TABLE: SEARCH + EVIDENCE FILTER
   ************************************************************/
@@ -474,7 +476,7 @@
         continue;
       }
 
-      // evidence filter (col 4)
+      // forced evidence col index=4
       const forcedEvidence = rows[i].getElementsByTagName("td")[4].textContent.toLowerCase();
       for (let ev of selectedEvidences) {
         if (!forcedEvidence.includes(ev)) {
@@ -488,6 +490,8 @@
   /************************************************************
    4) SORTING FOR GHOST TABLE
   ************************************************************/
+  // colIndex: which column to sort by
+  // numeric: whether to parse numeric
   function sortGhostTable(colIndex, numeric) {
     const table = document.getElementById("ghostTable");
     const tbody = table.getElementsByTagName("tbody")[0];
@@ -535,14 +539,13 @@
   }
 
   /************************************************************
-   6) DEFAULT SORT (by Name) in DESC order on page load
+   6) DEFAULT SORT BY NAME (DESC) ON PAGE LOAD
   ************************************************************/
   window.addEventListener('load', () => {
-    // Trick: set data-sortdir0 = 'asc' so next toggle becomes 'desc'
+    // Force the next toggle on col 0 to be desc
     const ghostTable = document.getElementById('ghostTable');
     ghostTable.setAttribute('data-sortdir0', 'asc'); 
-    // Now call sortGhostTable(0,false) 
-    // to toggle from asc -> desc.
+    // Then call sort => toggles to desc
     sortGhostTable(0,false);
   });
 </script>
