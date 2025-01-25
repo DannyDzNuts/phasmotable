@@ -252,8 +252,8 @@
         <!-- SPIRIT -->
 <tr>
   <td>Spirit</td>
-  <td>No special abilities; smudge sticks last longer against it</td>
-  <td>Normal roam</td>
+  <td>Smudge sticks last longer against it</td>
+  <td>Normal</td>
   <td>Normal</td>
   <td></td>
   <td>1.5m / 3.0m</td>
@@ -265,7 +265,7 @@
 <!-- WRAITH -->
 <tr>
   <td>Wraith</td>
-  <td>Avoids salt footsteps; can teleport to players randomly</td>
+  <td>No salt footsteps; can teleport to players randomly</td>
   <td>Teleport-based roam</td>
   <td>Normal</td>
   <td></td>
@@ -278,8 +278,8 @@
 <!-- PHANTOM -->
 <tr>
   <td>Phantom</td>
-  <td>Looking at it drains sanity faster; vanishes on photo</td>
-  <td>Normal roam</td>
+  <td>0.5%/s sanity drain when in psuedo LOS during events; does not appear in photos</td>
+  <td>Normal</td>
   <td>Normal</td>
   <td></td>
   <td>1.5m / 3.0m</td>
@@ -292,7 +292,7 @@
 <tr>
   <td>Poltergeist</td>
   <td>Throws multiple objects at once; throw freq. is high</td>
-  <td>Normal roam</td>
+  <td>Normal</td>
   <td>Normal</td>
   <td></td>
   <td>1.5m / 3.0m</td>
@@ -304,7 +304,7 @@
 <!-- BANSHEE -->
 <tr>
   <td>Banshee</td>
-  <td>Stalks 1 target; hunts from range if target is inside</td>
+  <td>Targets & stalks a single player; Freq. singing; hunts from range if target is inside; unique Sound on blpblpblpblp</td>
   <td>Target-focused roam</td>
   <td>Normal</td>
   <td></td>
@@ -317,13 +317,13 @@
 <!-- JINN -->
 <tr>
   <td>Jinn</td>
-  <td>Faster if far away & breaker on; territorial near breaker</td>
+  <td>Faster if far away & breaker on; territorial near breaker and will drain sanity faster; cannot use abilities / hunt when breaker off; cannot turn off breaker (can trip by turning on too many lights)</td>
   <td>Territorial roam (breaker area)</td>
   <td>Normal</td>
   <td></td>
   <td>1.5m / 3.0m</td>
   <td>1.6</td>
-  <td>Up to ~2.5 (line-of-sight far distance)</td>
+  <td>2.5 (up to, line-of-sight / long distance)</td>
   <td>50%</td>
 </tr>
 
@@ -337,7 +337,7 @@
   <td>1.5m / 3.0m</td>
   <td>1.6</td>
   <td>1.6</td>
-  <td>60% / 40% (dark / lit)</td>
+  <td>60% / 40% (dark / light)</td>
 </tr>
 
 <!-- REVENANT -->
@@ -349,7 +349,7 @@
   <td></td>
   <td>1.5m / 3.0m</td>
   <td>1.0</td>
-  <td>Up to ~3.0 (line-of-sight)</td>
+  <td>3.0 (up to, line-of-sight)</td>
   <td>50%</td>
 </tr>
 
@@ -369,20 +369,20 @@
 <!-- DEMON (UPDATED) -->
 <tr>
   <td>Demon</td>
-  <td>Frequent hunts; can hunt from 70% avg sanity; special ability hunts at 100% & larger crucifix range (~5m)</td>
+  <td>Frequent hunts; can hunt from 70% avg sanity; special ability hunts at 100% & larger crucifix range</td>
   <td>Aggressive roam</td>
   <td>Normal</td>
-  <td></td> <!-- No forced evidence for Demon -->
+  <td></td>
   <td>1.5m / 3.0m</td>
   <td>1.6</td>
   <td>1.6</td>
-  <td>70% / 100%</td>
+  <td>70% / 100% (normal / rare ability)</td>
 </tr>
 
 <!-- YUREI -->
 <tr>
   <td>Yurei</td>
-  <td>Can slam doors & significantly lower sanity w/ ability</td>
+  <td>Can slam doors & significantly lower sanity w/ door shutting ability; confined to room after smudging</td>
   <td>Normal roam</td>
   <td>Normal</td>
   <td></td>
@@ -395,8 +395,8 @@
 <!-- ONI -->
 <tr>
   <td>Oni</td>
-  <td>More visible hunts; highly active when people around</td>
-  <td>Aggressive roam</td>
+  <td>More visible hunts (faster blinking); highly active when people around</td>
+  <td>Aggressive</td>
   <td>Normal</td>
   <td></td>
   <td>1.5m / 3.0m</td>
@@ -421,12 +421,12 @@
 <!-- HANTU -->
 <tr>
   <td>Hantu</td>
-  <td>Moves faster in colder rooms; slower in warm</td>
-  <td>Normal roam</td>
+  <td>Moves faster in colder rooms; slower in warm; cold breath during hunts when breaker off</td>
+  <td>Normal</td>
   <td>Temp-based</td>
   <td>Freezing Temperatures</td>
   <td>1.5m / 3.0m</td>
-  <td>~1.4 - 2.7</td>
+  <td>~1.4 - 2.7 (depending on room temp)</td>
   <td>~1.4 - 2.7 (depending on room temp)</td>
   <td>50%</td>
 </tr>
@@ -434,10 +434,10 @@
 <!-- GORYO -->
 <tr>
   <td>Goryo</td>
-  <td>DOTS only visible on cam & from far; rarely leaves room</td>
+  <td>DOTS only visible on cam & while no players nearby; rarely leaves room; cannot change favorite room</td>
   <td>Minimal roam from its room</td>
   <td>Normal</td>
-  <td>D.O.T.S.</td> <!-- Goryo does NOT have truly forced DOTS in no-evidence mode -->
+  <td>D.O.T.S.</td>
   <td>1.5m / 3.0m</td>
   <td>1.6</td>
   <td>1.6</td>
@@ -447,7 +447,7 @@
 <!-- MYLING -->
 <tr>
   <td>Myling</td>
-  <td>Quieter footsteps & more frequent vocal sounds on paramic</td>
+  <td>Quieter footsteps & more frequent vocal sounds on blpblpblpblpblp</td>
   <td>Normal roam</td>
   <td>Normal</td>
   <td></td>
@@ -486,20 +486,20 @@
 <!-- RAIJU -->
 <tr>
   <td>Raiju</td>
-  <td>Faster near active electronics; stronger EMF interference</td>
+  <td>Faster near active electronics; stronger EMF interference; disrupts electronics from further away when hunting</td>
   <td>Drawn to electronics</td>
   <td>Normal</td>
   <td></td>
   <td>1.5m / 3.0m</td>
   <td>1.6</td>
-  <td>Up to ~2.5 (w/ electronics)</td>
-  <td>50% / 65%</td>
+  <td>2.5 (up to, w/ electronics)</td>
+  <td>50% / 65%(no electronics / near electronics</td>
 </tr>
 
 <!-- OBAKE -->
 <tr>
   <td>Obake</td>
-  <td>Fingerprints fade quickly; rare 6-finger print; shapeshift events</td>
+  <td>Fingerprints fade quickly; rare 6-finger print (16.7% chance); shapeshifts during events</td>
   <td>Normal roam</td>
   <td>Normal</td>
   <td>Ultraviolet</td>
@@ -515,7 +515,7 @@
   <td>Copies other ghost abilities; ALWAYS has ghost orbs</td>
   <td>Varies (mimics target ghost)</td>
   <td>Varies</td>
-  <td>Ghost Orbs <!-- The Mimic has forced orbs in any mode --></td>
+  <td>Ghost Orbs (Still applies to no-evidence runs)</td>
   <td>1.5m / 3.0m</td>
   <td>Varies</td>
   <td>Varies</td>
@@ -530,8 +530,8 @@
   <td>Faster w/ lower sanity</td>
   <td>Spriit Box</td>
   <td>1.5m / 3.0m</td>
-  <td>~1.5 (base)</td>
-  <td>Up to ~2.25 at 0% sanity</td>
+  <td>1.5 (at max sanity)</td>
+  <td>2.25 (up to, at 0% sanity</td>
   <td>50%</td>
 </tr>
 
@@ -541,10 +541,10 @@
   <td>Knows your location always; very slow up close, faster far</td>
   <td>Pinpoint roam</td>
   <td>Variable</td>
-  <td></td>
+  <td>Spirit Box</td>
   <td>1.5m / 3.0m</td>
-  <td>~1.6 (avg)</td>
-  <td>~0.4 - 3.0 (distance-based)</td>
+  <td>1.6 (avg)</td>
+  <td>3.0 - 0.4(distance-based)</td>
   <td>40%</td>
 </tr>
 
@@ -557,7 +557,7 @@
   <td></td>
   <td>1.5m / 3.0m</td>
   <td>1.6 (initial)</td>
-  <td>~1.0 final (aged)</td>
+  <td>1.0 final (aged)</td>
   <td>75% / 15% (longer present)</td>
 </tr>
 
