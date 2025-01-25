@@ -888,9 +888,13 @@
         continue;
       }
 
-      // forced evidence = col 4
+      // forced evidence = col 4, all evidence = col 5
       const forcedEvidence = rows[i].getElementsByTagName("td")[4].textContent.toLowerCase();
+      const allEvidence = rows[i].getElementsByTagName("td")[5].textContent.toLowerCase();
       for (let ev of selectedEvidences) {
+        if (!allEvidence.includes(ev)) {
+          rows[i].style.display = "none";
+          break;
         if (!forcedEvidence.includes(ev)) {
           rows[i].style.display = "none";
           break;
