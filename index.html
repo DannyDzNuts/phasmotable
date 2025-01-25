@@ -45,16 +45,16 @@
     .blood-line {
       fill: none;
       stroke: #b00;
-      stroke-width: 4;
+      stroke-width: 10;
       stroke-linejoin: round;
       stroke-linecap: round;
       filter: blur(2px);
-      animation: flameFlicker 3s infinite ease-in-out;
+      animation: flameFlicker 10s infinite ease-in-out;
     }
     @keyframes flameFlicker {
-      0%   { stroke: #b00; opacity: 0.8; filter: blur(2px); }
-      50%  { stroke: #c00; opacity: 1;   filter: blur(3px); }
-      100% { stroke: #b00; opacity: 0.7; filter: blur(2px); }
+      0%   { stroke: #b00; opacity: 0; filter: blur(5px); }
+      50%  { stroke: #c00; opacity: 1;   filter: blur(2px); }
+      100% { stroke: #b00; opacity: 0; filter: blur(5px); }
     }
 
     /*****************************************************
@@ -834,7 +834,7 @@
     const styleEl  = document.createElement('style');
 
     let keyframes = `@keyframes ${animName} {\n`;
-    for (let i=0; i<=100; i+=5) {
+    for (let i=0; i<=100; i+=2) {
       const frac = i/100;
       const x = amplitude * sign * Math.sin(waveCount * 2*Math.PI * frac);
       const y = -maxRise * frac;
@@ -864,8 +864,8 @@
   }
 
   // spawn embers
-  setInterval(spawnEmber, 700);
-  for (let i=0; i<12; i++) spawnEmber();
+  setInterval(spawnEmber, 75);
+  for (let i=0; i<25; i++) spawnEmber();
 
   /************************************************************
    3) GHOSTS TABLE: SEARCH + EVIDENCE FILTER
