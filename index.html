@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Standard mobile-friendly viewport (no orientation lock) -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
   <meta charset="UTF-8" />
-  <title>Spinning Pentagram + Softer Red Tables (Final)</title>
+  <title>Final - Spinning Pentagram + Softer Red Tables</title>
   <style>
     /*****************************************************
      1) DEMONIC BACKGROUND (Spinning Circle + Pentagram)
@@ -14,10 +13,10 @@
       padding: 0;
       width: 100%;
       height: 100%;
-      /* Removed overflow: hidden; so scrollbars can appear if needed */
+      /* We'll handle scroll hiding/showing via JS. */
       font-family: Arial, sans-serif;
       color: #fff;
-      background: #000; 
+      background: #000;
     }
 
     .symbol-container {
@@ -59,41 +58,36 @@
     }
 
     /*****************************************************
-     2) DRIFTING EMBERS (Random Sine Wave)
+     2) DRIFTING EMBERS (random sine wave)
     *****************************************************/
     .embers {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      bottom: 0; left: 0;
+      width: 100%; height: 100%;
       pointer-events: none;
       z-index: 0;
     }
     .ember {
       position: absolute;
       bottom: 0;
-      width: 3px; 
-      height: 3px;
+      width: 3px; height: 3px;
       background: #c04000;
       border-radius: 50%;
       opacity: 0;
     }
 
     /*****************************************************
-     3) TABLE WRAPPER
-       - 80% wide, up to 1200px, no extra border
+     3) TABLE WRAPPER (80% wide on large, no border, etc.)
     *****************************************************/
     .table-wrapper {
       position: relative;
       z-index: 2;
       width: 80%;
       max-width: 1200px;
-      margin: 20px auto;
+      margin: 20px auto 40px auto;
       padding: 20px;
       background: rgba(0,0,0,0.4);
       border-radius: 8px;
-      margin-bottom: 40px;
     }
 
     .table-wrapper h1 {
@@ -102,6 +96,7 @@
       color: #f00;
       text-shadow: 0 0 5px #f00;
     }
+
     .filters {
       text-align: center;
       margin-bottom: 10px;
@@ -136,17 +131,17 @@
     .red-table {
       width: 100%;
       border-collapse: separate;
-      border-spacing: 0 6px;
+      border-spacing: 0 6px; /* row gaps */
       background: rgba(0,0,0,0.3);
     }
     .red-table th, .red-table td {
-      border: none;
+      border: none;  /* no rigid borders */
       padding: 8px 10px;
       text-align: left;
       color: #fff;
     }
     .red-table thead tr {
-      background: #600; /* dark red */
+      background: #600; /* dark red header row */
     }
     .red-table th {
       cursor: pointer;
@@ -173,14 +168,14 @@
 
     /*****************************************************
      5) MOBILE-FRIENDLY 
-       - Larger search boxes (font + padding) 
+       - Larger search boxes 
        - smaller table text
     *****************************************************/
     @media (max-width: 768px) {
       .search-box input {
         width: 90%;
-        font-size: 16px;  /* bigger for readability */
-        padding: 10px; 
+        font-size: 16px;
+        padding: 10px;
       }
       th, td {
         padding: 6px;
@@ -190,23 +185,12 @@
   </style>
 </head>
 <body>
-
-  <!-- Spinning Pentagram -->
+  <!-- Spinning Pentagram in Center -->
   <div class="symbol-container">
     <svg id="bloodSymbol" viewBox="0 0 200 200">
       <g class="rotateGroup">
-        <!-- Circle drawn first -->
-        <circle
-          id="circlePath"
-          class="blood-line"
-          cx="100"
-          cy="100"
-          r="90"
-        />
-        <!-- Pentagram drawn second -->
-        <path
-          id="starPath"
-          class="blood-line"
+        <circle id="circlePath" class="blood-line" cx="100" cy="100" r="90" />
+        <path id="starPath" class="blood-line"
           d="M100,10 
              L152.9,172.81 
              L14.4,72.19 
@@ -218,13 +202,14 @@
     </svg>
   </div>
 
-  <!-- Embers -->
+  <!-- Drifting Embers -->
   <div class="embers" id="emberContainer"></div>
 
-  <!-- Ghosts Table -->
+  <!-- GHOSTS TABLE -->
   <div class="table-wrapper">
     <h1>Ghosts Table</h1>
     <div class="filters">
+      <!-- Search -->
       <div class="search-box">
         <input 
           type="text" 
@@ -233,6 +218,7 @@
           onkeyup="filterAllGhosts()"
         />
       </div>
+      <!-- Evidence Checkboxes -->
       <div class="evidence-boxes">
         <label>
           <input type="checkbox" value="Spirit Box" onclick="filterAllGhosts()" />
@@ -251,28 +237,19 @@
     <table class="red-table" id="ghostTable">
       <thead>
         <tr>
-          <!-- 0: Name (text, sortable) -->
           <th class="sortable" onclick="sortGhostTable(0,false)">Name</th>
-          <!-- 1: Unique Trait (text, not sorted) -->
           <th>Unique Trait</th>
-          <!-- 2: Roaming Behavior -->
           <th>Roaming Behavior</th>
-          <!-- 3: Footstep Speed -->
           <th>Footstep Speed</th>
-          <!-- 4: Forced Evidence (text, sortable) -->
           <th class="sortable" onclick="sortGhostTable(4,false)">Forced Evidence</th>
-          <!-- 5: Interaction Range (numeric) -->
           <th class="sortable" onclick="sortGhostTable(5,true)">Interaction Range</th>
-          <!-- 6: Base Speed (numeric) -->
           <th class="sortable" onclick="sortGhostTable(6,true)">Base Speed</th>
-          <!-- 7: Speed w/ Modifier (numeric) -->
           <th class="sortable" onclick="sortGhostTable(7,true)">Mod. Speed</th>
-          <!-- 8: Hunt Threshold (numeric) -->
           <th class="sortable" onclick="sortGhostTable(8,true)">Hunt %</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Example data with new columns -->
+        <!-- Example Data -->
         <tr>
           <td>Revenant</td>
           <td>Extremely fast w/LOS, slow w/o</td>
@@ -321,7 +298,7 @@
     </table>
   </div>
 
-  <!-- Cursed Items Table -->
+  <!-- CURSED ITEMS TABLE -->
   <div class="table-wrapper">
     <h1>Cursed Items Table</h1>
     <div class="search-box" style="text-align:center;">
@@ -362,7 +339,7 @@
 
 <script>
   /************************************************************
-   1) DRAW THE CIRCLE, THEN THE PENTAGRAM
+   1) DRAW THE CIRCLE THEN THE PENTAGRAM
   ************************************************************/
   const circlePath = document.getElementById("circlePath");
   const starPath   = document.getElementById("starPath");
@@ -445,6 +422,7 @@
     emberContainer.appendChild(ember);
   }
 
+  // spawn embers
   setInterval(spawnEmber, 700);
   for (let i=0; i<12; i++) spawnEmber();
 
@@ -457,26 +435,22 @@
     const tbody = table.getElementsByTagName("tbody")[0];
     const rows = tbody.getElementsByTagName("tr");
 
-    // gather selected evidences
     const checkboxes = document.querySelectorAll(".evidence-boxes input[type='checkbox']");
     let selectedEvidences = [];
     checkboxes.forEach(cb => {
-      if (cb.checked) {
-        selectedEvidences.push(cb.value.toLowerCase());
-      }
+      if (cb.checked) selectedEvidences.push(cb.value.toLowerCase());
     });
 
     for (let i=0; i<rows.length; i++) {
       rows[i].style.display = "";
 
-      // text search
       const rowText = rows[i].textContent.toLowerCase();
       if (searchInput && !rowText.includes(searchInput)) {
         rows[i].style.display = "none";
         continue;
       }
 
-      // forced evidence col index=4
+      // forced evidence = col 4
       const forcedEvidence = rows[i].getElementsByTagName("td")[4].textContent.toLowerCase();
       for (let ev of selectedEvidences) {
         if (!forcedEvidence.includes(ev)) {
@@ -490,14 +464,11 @@
   /************************************************************
    4) SORTING FOR GHOST TABLE
   ************************************************************/
-  // colIndex: which column to sort by
-  // numeric: whether to parse numeric
   function sortGhostTable(colIndex, numeric) {
     const table = document.getElementById("ghostTable");
     const tbody = table.getElementsByTagName("tbody")[0];
     let rows = Array.from(tbody.getElementsByTagName("tr"));
 
-    // track current direction for that column
     const currentDir = table.getAttribute("data-sortdir"+colIndex) || "asc";
     const newDir = (currentDir === "asc") ? "desc" : "asc";
     table.setAttribute("data-sortdir"+colIndex, newDir);
@@ -507,7 +478,6 @@
       let y = b.getElementsByTagName("td")[colIndex].textContent.trim();
 
       if (numeric) {
-        // parse out 'm', '%' etc.
         x = parseFloat(x.replace(/[^\d.]/g, "")) || 0;
         y = parseFloat(y.replace(/[^\d.]/g, "")) || 0;
       } else {
@@ -525,7 +495,7 @@
   }
 
   /************************************************************
-   5) SIMPLE SEARCH FOR CURSED ITEMS TABLE
+   5) SIMPLE SEARCH FOR CURSED ITEMS
   ************************************************************/
   function searchSimple(inputId, tableId) {
     const input = document.getElementById(inputId).value.toLowerCase();
@@ -539,15 +509,40 @@
   }
 
   /************************************************************
-   6) DEFAULT SORT BY NAME (DESC) ON PAGE LOAD
+   6) DEFAULT SORT BY NAME (DESC from A to Z top->bottom) ON LOAD
   ************************************************************/
   window.addEventListener('load', () => {
-    // Force the next toggle on col 0 to be desc
+    // We'll interpret "descending so from A at top to Z at bottom" 
+    // as standard alphabetical ascending. 
+    // We'll do a trick to ensure we end up w/ 'desc' from the code's viewpoint
+    // so the final visual is A->Z top to bottom.
     const ghostTable = document.getElementById('ghostTable');
-    ghostTable.setAttribute('data-sortdir0', 'asc'); 
-    // Then call sort => toggles to desc
+    // Force next toggle on col 0 to be asc
+    ghostTable.setAttribute('data-sortdir0','desc'); 
+    // Now calling sort triggers newDir = 'asc' => "A to Z" top->bottom
     sortGhostTable(0,false);
+
+    checkScroll();
   });
+
+  /************************************************************
+   7) SHOW/HIDE SCROLLBAR ON DESKTOP IF CONTENT FITS
+      On mobile, always enable scroll
+  ************************************************************/
+  window.addEventListener('resize', checkScroll);
+  function checkScroll() {
+    // if mobile, always show auto
+    if (window.innerWidth <= 768) {
+      document.body.style.overflowY = 'auto';
+      return;
+    }
+    // desktop
+    if (document.body.scrollHeight > window.innerHeight) {
+      document.body.style.overflowY = 'auto';  // content > screen => scroll
+    } else {
+      document.body.style.overflowY = 'hidden'; // content fits => hide scrollbar
+    }
+  }
 </script>
 </body>
 </html>
