@@ -1,635 +1,550 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phasmophobia Ghosts Table</title>
-    <style>
-body {
-    background: #000; /* Solid black background */
-    color: #FFF;
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    gap: 20px;
-    overflow-y: auto;
-    position: relative;
-}
-
-.stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    background: transparent;
-    overflow: hidden;
-}
-
-.star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: #fff;
-    border-radius: 50%;
-    animation: flicker 3s infinite alternate;
-    opacity: 0;
-}
-
-@keyframes flicker {
-    0%, 100% {
-        opacity: 0.3;
-    }
-    50% {
-        opacity: 1;
-    }
-}
-
-h1 {
-    text-align: center;
-    font-weight: 300;
-    margin-bottom: 20px;
-    color: #0ff;
-    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
-    z-index: 2;
-}
-
-.table-container {
-    background-color: #000; /* Solid black background for tables */
-    border-radius: 15px;
-    padding: 20px;
-    max-width: 90%;
-    overflow-x: auto;
-    box-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff;
-    z-index: 2;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0;
-    font-size: 14px;
-}
-
-th, td {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 8px 10px;
-    text-align: left;
-    color: #FFF;
-    word-wrap: break-word;
-}
-
-th {
-    background: rgba(0, 255, 255, 0.2);
-    font-weight: bold;
-    position: sticky;
-    top: 0;
-    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
-}
-
-th.sortable {
-    cursor: pointer;
-}
-
-th.sortable::after {
-    content: " \21D5";
-    font-size: 0.8em;
-    color: #888;
-}
-
-tr:nth-child(even) {
-    background: rgba(0, 255, 255, 0.1);
-}
-
-tr:nth-child(odd) {
-    background: rgba(0, 255, 255, 0.05);
-}
-
-tr:hover {
-    background: rgba(0, 255, 255, 0.2);
-    box-shadow: 0 0 10px #0ff;
-}
-
-.glow-table {
-    background-color: #000; /* Solid black background for tables */
-    box-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff;
-    border-radius: 15px;
-    padding: 20px;
-    overflow-x: auto;
-    z-index: 2;
-}
-
-.glow-table table {
-    width: 100%;
-    table-layout: auto;
-}
-
-.glow-table td:first-child, .table-container td:first-child {
-    position: sticky;
-    left: 0;
-    background-color: rgba(0, 255, 255, 0.1);
-    z-index: 1;
-}
-
-@media (max-width: 768px) {
-    table {
-        font-size: 12px;
+  <!-- Enforce portrait orientation on mobile (where supported) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, orientation=portrait" />
+  <meta charset="UTF-8" />
+  <title>Spinning Pentagram + Softer Red Tables (Descending Sort)</title>
+  <style>
+    /*****************************************************
+     1) DEMONIC BACKGROUND (Spinning Circle + Pentagram)
+    *****************************************************/
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000; /* black base */
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: #fff;
     }
 
-    th, td {
-        padding: 6px 8px;
+    .symbol-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      height: 400px;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+    svg#bloodSymbol {
+      width: 100%;
+      height: 100%;
+    }
+    .rotateGroup {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: rotatePentagram 20s linear infinite;
+    }
+    @keyframes rotatePentagram {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
-    .table-container, .glow-table {
-        padding: 10px;
+    .blood-line {
+      fill: none;
+      stroke: #b00;
+      stroke-width: 4;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      filter: blur(2px);
+      animation: flameFlicker 3s infinite ease-in-out;
+    }
+    @keyframes flameFlicker {
+      0%   { stroke: #b00; opacity: 0.8; filter: blur(2px); }
+      50%  { stroke: #c00; opacity: 1;   filter: blur(3px); }
+      100% { stroke: #b00; opacity: 0.7; filter: blur(2px); }
     }
 
-    .glow-table td, .table-container td {
-        font-size: 10px;
+    /*****************************************************
+     2) DRIFTING EMBERS WITH RANDOM SINE WAVE
+    *****************************************************/
+    .embers {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
     }
-}
-    </style>
+    .ember {
+      position: absolute;
+      bottom: 0;
+      width: 3px; 
+      height: 3px;
+      background: #c04000;
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    /*****************************************************
+     3) TABLE WRAPPER (NO BORDER AROUND, WIDER FOR LARGE SCREENS)
+    *****************************************************/
+    .table-wrapper {
+      position: relative;
+      z-index: 2;
+      /* Use 80% width, up to some max (e.g., 1200px) for large devices */
+      width: 80%;
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 8px;
+      margin-bottom: 40px;
+    }
+
+    .table-wrapper h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #f00;
+      text-shadow: 0 0 5px #f00;
+    }
+
+    .filters {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .search-box {
+      margin-bottom: 8px;
+    }
+    .search-box input {
+      width: 60%;
+      max-width: 300px;
+      padding: 6px;
+      border-radius: 4px;
+      border: 1px solid #900;
+      outline: none;
+      background: #200;
+      color: #fdd;
+    }
+    .evidence-boxes {
+      margin-top: 5px;
+    }
+    .evidence-boxes label {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    .evidence-boxes input[type="checkbox"] {
+      margin-right: 4px;
+    }
+
+    /*****************************************************
+     4) RED TABLE (LESS RIGID)
+    *****************************************************/
+    .red-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 6px;
+      background: rgba(0,0,0,0.3);
+    }
+    .red-table th, .red-table td {
+      border: none;  /* no rigid borders */
+      padding: 8px 10px;
+      text-align: left;
+      color: #fff;
+    }
+    .red-table thead tr {
+      background: #600; /* dark red header row */
+    }
+    .red-table th {
+      cursor: pointer;
+      text-shadow: 0 0 2px #f00;
+    }
+    .red-table tbody tr {
+      border-radius: 6px;
+    }
+    .red-table tr:nth-child(even) {
+      background: rgba(200,0,0,0.2); /* brighter red for even rows */
+    }
+    .red-table tr:nth-child(odd) {
+      background: rgba(100,0,0,0.2);
+    }
+    .red-table tr:hover td {
+      background: rgba(255,0,0,0.2);
+    }
+    .sortable::after {
+      content: " \25B2\25BC";
+      font-size: 0.7em;
+      color: #888;
+      margin-left: 5px;
+    }
+
+    /*****************************************************
+     5) MOBILE-FRIENDLY ADJUSTMENTS
+    *****************************************************/
+    @media (max-width: 768px) {
+      .search-box input {
+        width: 90%;
+      }
+      th, td {
+        padding: 6px;
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="stars">
-        <!-- Stars dynamically added through script -->
+
+  <!-- Spinning Pentagram -->
+  <div class="symbol-container">
+    <svg id="bloodSymbol" viewBox="0 0 200 200">
+      <g class="rotateGroup">
+        <!-- Circle draws first -->
+        <circle
+          id="circlePath"
+          class="blood-line"
+          cx="100"
+          cy="100"
+          r="90"
+        />
+        <!-- Pentagram draws second -->
+        <path
+          id="starPath"
+          class="blood-line"
+          d="M100,10 
+             L152.9,172.81 
+             L14.4,72.19 
+             L185.6,72.19 
+             L47.1,172.81 
+             Z"
+        />
+      </g>
+    </svg>
+  </div>
+
+  <!-- Embers -->
+  <div class="embers" id="emberContainer"></div>
+
+  <!-- Ghosts Table -->
+  <div class="table-wrapper">
+    <h1>Ghost Traits</h1>
+    <div class="filters">
+      <div class="search-box">
+        <input 
+          type="text" 
+          id="ghostSearch" 
+          placeholder="Search Ghosts..."
+          onkeyup="filterAllGhosts()"
+        />
+      </div>
+      <div class="evidence-boxes">
+        <label>
+          <input type="checkbox" value="Spirit Box" onclick="filterAllGhosts()" />
+          Spirit Box
+        </label>
+        <label>
+          <input type="checkbox" value="Ghost Orbs" onclick="filterAllGhosts()" />
+          Ghost Orbs
+        </label>
+        <label>
+          <input type="checkbox" value="Freezing Temps" onclick="filterAllGhosts()" />
+          Freezing Temps
+        </label>
+      </div>
     </div>
-    <div class="table-container">
-        <h1>Ghosts Table</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th class="sortable" onclick="sortTable(0)">Name</th>
-                    <th class="sortable" onclick="sortTable(1)">Unique Traits</th>
-                    <th class="sortable" onclick="sortTable(2)">Forced Evidence</th>
-                    <th class="sortable" onclick="sortTable(3, true)">Interaction Range</th>
-                    <th>Roaming Behavior</th>
-                    <th>Footstep Speed</th>
-                    <th class="sortable" onclick="sortTable(6, true)">Base Speed (m/s)</th>
-                    <th class="sortable" onclick="sortTable(7, true)">Speed w/ Modifier (m/s)</th>
-                    <th class="sortable" onclick="sortTable(8, true)">Hunt Threshold</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-					<td>Revenant</td>
-					<td>Extremely fast w/line-of-sight; very slow w/o</td>
-					<td></td>
-					<td>12m</td>
-					<td>Average roam behavior</td>
-					<td>Very fast w/line-of-sight; slow w/o</td>
-					<td>1.6</td>
-					<td>5.0</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>Deogen</td>
-					<td>Always knows player location; very slow near player</td>
-					<td>Spirit Box</td>
-					<td>20m</td>
-					<td>Rarely roams far</td>
-					<td>Fast when far; slow w/proximity</td>
-					<td>1.6</td>
-					<td>3.5</td>
-					<td>40%</td>
-				</tr>
-			
-				<tr>
-					<td>Hantu</td>
-					<td>Faster in cold rooms; visible cold breath during hunts</td>
-					<td>Cold breath</td>
-					<td>12m</td>
-					<td>Frequent roaming to colder areas</td>
-					<td>Faster in cold; normal in warm</td>
-					<td>1.6</td>
-					<td>2.5</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>Raiju</td>
-					<td>Faster near active electronics; increases electronic range</td>
-					<td></td>
-					<td>15m</td>
-					<td>Frequent roaming behavior</td>
-					<td>Faster w/electronics; normal w/o</td>
-					<td>1.6</td>
-					<td>2.5</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>The Mimic</td>
-					<td>Mimics abilities and evidence of other ghosts; orbs accompany</td>
-					<td>Ghost Orbs</td>
-					<td>10m</td>
-					<td>Mimics roaming behaviors</td>
-					<td>Mimics other ghosts</td>
-					<td>1.6</td>
-					<td>2.5</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>The Twins</td>
-					<td>Two entities w/separate actions; simultaneous interactions</td>
-					<td></td>
-					<td>20m</td>
-					<td>High roaming variability</td>
-					<td>Varies between twins</td>
-					<td>1.6</td>
-					<td>2.5</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>Moroi</td>
-					<td>Curses players; weaker when Smudged</td>
-					<td></td>
-					<td>15m</td>
-					<td>Moderate roaming behavior</td>
-					<td>Slow at start; faster over time</td>
-					<td>1.6</td>
-					<td>2.2</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>Banshee</td>
-					<td>Targets one player; special scream on parabolic mic</td>
-					<td>D.O.T.S.</td>
-					<td>15m</td>
-					<td>Less likely to roam when hunting</td>
-					<td>Normal w/o line-of-sight; faster w/sight</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>Demon</td>
-					<td>Hunts more often than others; can hunt at higher sanity</td>
-					<td>Freezing Temps</td>
-					<td>10m</td>
-					<td>Aggressive roaming behavior</td>
-					<td>Normal w/o line-of-sight; fast w/sight</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>70%</td>
-				</tr>
-			
-				<tr>
-					<td>Goryo</td>
-					<td>Only seen on D.O.T.S. through cameras</td>
-					<td>D.O.T.S.</td>
-					<td>15m</td>
-					<td>Minimal roaming behavior</td>
-					<td>Normal</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>Jinn</td>
-					<td>Faster w/electricity; drains sanity w/power ability</td>
-					<td></td>
-					<td>20m</td>
-					<td>Stays near breaker</td>
-					<td>Faster w/power; normal w/o power</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>Mare</td>
-					<td>Prefers darkness; turns off lights often</td>
-					<td></td>
-					<td>10m</td>
-					<td>Roams more in dark areas</td>
-					<td>Normal</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>60%</td>
-				</tr>
-			
-				<tr>
-					<td>Myling</td>
-					<td>Quieter hunting sounds and footsteps</td>
-					<td></td>
-					<td>10m</td>
-					<td>Frequent but quiet roaming</td>
-					<td>Normal; quieter steps</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>Obake</td>
-					<td>Occasionally leaves six-fingered fingerprints</td>
-					<td>Fingerprints</td>
-					<td>12m</td>
-					<td>Rarely roams far</td>
-					<td>Normal</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>Oni</td>
-					<td>More visible during hunts; rarely blinks</td>
-					<td></td>
-					<td>15m</td>
-					<td>Active roaming behavior</td>
-					<td>Normal</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>Onryo</td>
-					<td>Angry if candles are blown out; hunts when candles extinguish</td>
-					<td></td>
-					<td>10m</td>
-					<td>Moderate roaming behavior</td>
-					<td>Normal</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>60%</td>
-				</tr>
-			
-				<tr>
-					<td>Phantom</td>
-					<td>Disappears when taking a photo; weaker sanity drain w/photo</td>
-					<td></td>
-					<td>10m</td>
-					<td>Moderate roaming behavior</td>
-					<td>Normal w/o line-of-sight; average w/sight</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>Poltergeist</td>
-					<td>Throws multiple objects at once</td>
-					<td></td>
-					<td>10m</td>
-					<td>Active but erratic roaming</td>
-					<td>Normal</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>Shade</td>
-					<td>Less active around groups; shy behavior</td>
-					<td></td>
-					<td>10m</td>
-					<td>Rare roaming behavior</td>
-					<td>Normal</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>35%</td>
-				</tr>
-			
-				<tr>
-					<td>Spirit</td>
-					<td>Standard ghost; smudge effect lasts 3 min</td>
-					<td></td>
-					<td>10m</td>
-					<td>Average roaming behavior</td>
-					<td>Normal</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>Thaye</td>
-					<td>Starts aggressive; ages and weakens over time</td>
-					<td></td>
-					<td>15m</td>
-					<td>Frequent when young; slows w/age</td>
-					<td>Fast early; slower w/age</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>75% (young), decreases over time</td>
-				</tr>
-			
-				<tr>
-					<td>Wraith</td>
-					<td>Rarely leaves footprints; no UV footprints in salt</td>
-					<td>Spirit Box</td>
-					<td>12m</td>
-					<td>Unpredictable roaming behavior</td>
-					<td>Normal</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>50%</td>
-				</tr>
-			
-				<tr>
-					<td>Yokai</td>
-					<td>Hunts more when talking nearby</td>
-					<td></td>
-					<td>15m</td>
-					<td>Moderate roaming behavior</td>
-					<td>Normal</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>80% (near voice)</td>
-				</tr>
-			
-				<tr>
-					<td>Yurei</td>
-					<td>Drains sanity faster when close; slams doors after Smudge</td>
-					<td></td>
-					<td>15m</td>
-					<td>Less roaming after Smudge</td>
-					<td>Normal</td>
-					<td>1.6</td>
-					<td>1.6</td>
-					<td>50%</td>
-				</tr>
-            </tbody>
-        </table>
+    <table class="red-table" id="ghostTable">
+      <thead>
+        <tr>
+          <!-- 0: Name (text, sortable) -->
+          <th class="sortable" onclick="sortGhostTable(0,false)">Name</th>
+          <!-- 1: Unique Trait (text, not sorted) -->
+          <th>Unique Trait</th>
+          <!-- 2: Roaming Behavior (text, not sorted) -->
+          <th>Roaming Behavior</th>
+          <!-- 3: Footstep Speed (text, not sorted) -->
+          <th>Footstep Speed</th>
+          <!-- 4: Forced Evidence (text, sortable) -->
+          <th class="sortable" onclick="sortGhostTable(4,false)">Forced Evidence</th>
+          <!-- 5: Interaction Range (numeric, e.g. '12m') -->
+          <th class="sortable" onclick="sortGhostTable(5,true)">Interaction Range</th>
+          <!-- 6: Base Speed (numeric) -->
+          <th class="sortable" onclick="sortGhostTable(6,true)">Base Speed</th>
+          <!-- 7: Speed w/ Modifier (numeric) -->
+          <th class="sortable" onclick="sortGhostTable(7,true)">Mod. Speed</th>
+          <!-- 8: Hunt Threshold (numeric, e.g. '50%') -->
+          <th class="sortable" onclick="sortGhostTable(8,true)">Hunt %</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Examples -->
+        <tr>
+          <td>Revenant</td>
+          <td>Extremely fast w/LOS, very slow w/o</td>
+          <td>Average roam</td>
+          <td>Fast w/LOS; slow w/o</td>
+          <td></td>
+          <td>12m</td>
+          <td>1.6</td>
+          <td>5.0</td>
+          <td>50%</td>
+        </tr>
+        <tr>
+          <td>Demon</td>
+          <td>Can hunt at higher sanity</td>
+          <td>Aggressive roam</td>
+          <td>Normal</td>
+          <td>Freezing Temps</td>
+          <td>10m</td>
+          <td>1.6</td>
+          <td>1.6</td>
+          <td>70%</td>
+        </tr>
+        <tr>
+          <td>The Mimic</td>
+          <td>Copies other ghosts</td>
+          <td>Unpredictable roam</td>
+          <td>Mimics footstep speeds</td>
+          <td>Ghost Orbs</td>
+          <td>10m</td>
+          <td>1.6</td>
+          <td>2.5</td>
+          <td>50%</td>
+        </tr>
+        <tr>
+          <td>Deogen</td>
+          <td>Always knows your location; slow near target</td>
+          <td>Rarely roams far</td>
+          <td>Fast far away; slow up close</td>
+          <td>Spirit Box</td>
+          <td>20m</td>
+          <td>1.6</td>
+          <td>3.5</td>
+          <td>40%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Cursed Items Table -->
+  <div class="table-wrapper">
+    <h1>Cursed Item Locations</h1>
+    <div class="search-box" style="text-align:center;">
+      <input 
+        type="text"
+        id="cursedSearch"
+        placeholder="Search Cursed Items..."
+        onkeyup="searchSimple('cursedSearch','cursedTable')"
+      />
     </div>
-<br><br><br><br><br><br><br><br><br><br>
-    <div class="glow-table">
-      <h1>Cursed Items</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Map</th>
-                    <th>Ouija Board</th>
-                    <th>Music Box</th>
-                    <th>Summoning Circle</th>
-                    <th>Tarot Cards</th>
-                    <th>Haunted Mirror</th>
-                    <th>Voodoo Doll</th>
-                    <th>Monkey Paw</th>
-                </tr>
-            </thead>
-            <tbody>
-                <td>6 Tanglewood Drive</td>
-				<td>Basement: On a table.</td>
-				<td>Nursery: On a shelf.</td>
-				<td>Basement: In the center.</td>
-				<td>Living Room: End table.</td>
-				<td>Master Bedroom: Hanging on wall.</td>
-				<td>Garage: On trashcan.</td>
-				<td>Living Room: Glass case.</td>
-			</tr>
-			<tr>
-				<td>42 Edgefield Road</td>
-				<td>Utility Room: On floor.</td>
-				<td>Living Room: Dresser.</td>
-				<td>Basement: Center.</td>
-				<td>Entrance: Table by door.</td>
-				<td>Hallway: Stairs wall.</td>
-				<td>2nd Floor: Blue Bedroom bed.</td>
-				<td>Orange Bedroom: On desk.</td>
-			</tr>
-			<tr>
-				<td>10 Ridgeview Court</td>
-				<td>Utility Closet: On floor.</td>
-				<td>Girl's Bedroom: Near door.</td>
-				<td>Basement: Behind stairs.</td>
-				<td>Foyer: Near window.</td>
-				<td>Hallway: Behind stairs.</td>
-				<td>Office: Across garage.</td>
-				<td>Boy's Bedroom: White desk.</td>
-			</tr>
-			<tr>
-				<td>Grafton Farmhouse</td>
-				<td>Master Bedroom: Closet.</td>
-				<td>Foyer: Corner near stairs.</td>
-				<td>Storage: Far-left corner.</td>
-				<td>Dining Room: Center.</td>
-				<td>Living Room: Near kitchen.</td>
-				<td>Nursery: Shelf near crib.</td>
-				<td>Living Room: Display case.</td>
-			</tr>
-			<tr>
-				<td>13 Willow Street</td>
-				<td>Garage: Utility closet.</td>
-				<td>Living Room: Far-right corner.</td>
-				<td>Basement: Hallway.</td>
-				<td>Living Room: Middle.</td>
-				<td>Garage: Utility closet.</td>
-				<td>Boy's Bedroom: Far-left corner.</td>
-				<td>Garage: Near shelf.</td>
-			</tr>
-			<tr>
-				<td>Point Hope</td>
-				<td>Main Hall: Near fireplace.</td>
-				<td>Library: On the desk.</td>
-				<td>Storage: Center.</td>
-				<td>Dining Hall: Corner.</td>
-				<td>Upstairs Hallway: End table.</td>
-				<td>Basement: Next to barrels.</td>
-				<td>Parlor: On shelf.</td>
-			</tr>
-			<tr>
-				<td>Maple Lodge Campsite</td>
-				<td>Main Cabin: Kitchen table.</td>
-				<td>Campfire: Log seat.</td>
-				<td>Picnic Area: Near the tables.</td>
-				<td>Main Cabin: Desk.</td>
-				<td>Restroom: Near mirror.</td>
-				<td>Cabin Loft: Shelf.</td>
-				<td>Reception: Glass case.</td>
-			</tr>
-			<tr>
-				<td>Camp Woodwind</td>
-				<td>Storage Tent: Corner.</td>
-				<td>Picnic Table: Near fire pit.</td>
-				<td>Central Area: By the logs.</td>
-				<td>Yellow Tent: On chair.</td>
-				<td>Blue Tent: By mirror.</td>
-				<td>Green Tent: Corner shelf.</td>
-				<td>Red Tent: On crate.</td>
-			</tr>
-			<tr>
-				<td>Brownstone Highschool</td>
-				<td>Library: Near desk.</td>
-				<td>Cafeteria: Center table.</td>
-				<td>Gym: Near bleachers.</td>
-				<td>Hallway: By lockers.</td>
-				<td>Principal's Office: Wall mirror.</td>
-				<td>Art Room: Near sink.</td>
-				<td>Entrance Hall: By trophy case.</td>
-			</tr>
-			<tr>
-				<td>Bleasdale Farmhouse</td>
-				<td>Workshop: On bench.</td>
-				<td>Living Room: Small table.</td>
-				<td>Attic: Near boxes.</td>
-				<td>Office: Desk.</td>
-				<td>Office: Wall lamp.</td>
-				<td>Upstairs Hallway: Between rooms.</td>
-				<td>Master Bedroom: On chest.</td>
-			</tr>
-			<tr>
-				<td>Sunny Meadows</td>
-				<td>Main Hall: Near altar.</td>
-				<td>Chapel: Pews.</td>
-				<td>Basement: Ritual room.</td>
-				<td>Lobby: Reception desk.</td>
-				<td>Hospital Wing: Wall mirror.</td>
-				<td>Morgue: Corner shelf.</td>
-				<td>Basement: On desk.</td>
-			</tr>
-			<tr>
-				<td>Sunny Meadows (Restricted)</td>
-				<td>Lobby: Reception corner.</td>
-				<td>Office: Near door.</td>
-				<td>Basement: Center room.</td>
-				<td>Hospital Wing: Bedside table.</td>
-				<td>Chapel: Wall mirror.</td>
-				<td>Office: Behind desk.</td>
-				<td>Morgue: Storage area.</td>
-			</tr>
-			<tr>
-				<td>Prison</td>
-				<td>Warden's Office: By desk.</td>
-				<td>Entrance: Security desk.</td>
-				<td>Cafeteria: Near tables.</td>
-				<td>Library: Center desk.</td>
-				<td>Cell Block A: Wall mirror.</td>
-				<td>Infirmary: Corner cabinet.</td>
-				<td>Visitation Room: Near benches.</td>
-			</tr>
-            </tbody>
-        </table>
-    </div>
+    <table class="red-table" id="cursedTable">
+      <thead>
+        <tr>
+          <th>Map</th>
+          <th>Ouija Board</th>
+          <th>Music Box</th>
+          <th>Tarot Cards</th>
+          <th>Summoning Circle</th>
+          <th>Haunted Mirror</th>
+          <th>Voodoo Doll</th>
+          <th>Monkey Paw</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>6 Tanglewood Drive</td>
+          <td>Basement table</td>
+          <td>Nursery shelf</td>
+          <td>Living Room end table</td>
+          <td>Basement center</td>
+          <td>Master BR wall</td>
+          <td>Garage trashcan</td>
+          <td>Living Room case</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 <script>
-    // Generate stars dynamically
-    const starsContainer = document.querySelector('.stars');
-    const numberOfStars = 100;
+  /************************************************************
+   1) DRAW THE CIRCLE THEN THE PENTAGRAM
+  ************************************************************/
+  const circlePath = document.getElementById("circlePath");
+  const starPath   = document.getElementById("starPath");
 
-    for (let i = 0; i < numberOfStars; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.animationDelay = `${Math.random() * 5}s`;
-        starsContainer.appendChild(star);
+  const circleLen = circlePath.getTotalLength();
+  const starLen   = starPath.getTotalLength();
+
+  circlePath.style.strokeDasharray  = circleLen;
+  circlePath.style.strokeDashoffset = circleLen;
+  starPath.style.strokeDasharray    = starLen;
+  starPath.style.strokeDashoffset   = starLen;
+
+  drawPath(circlePath, circleLen, 2000, () => {
+    drawPath(starPath, starLen, 3000);
+  });
+
+  function drawPath(pathElem, totalLen, duration, onComplete) {
+    let start = null;
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      let progress = timestamp - start;
+      let fraction = Math.min(progress / duration, 1);
+      pathElem.style.strokeDashoffset = totalLen * (1 - fraction);
+      if (fraction < 1) {
+        requestAnimationFrame(step);
+      } else if (onComplete) {
+        onComplete();
+      }
     }
+    requestAnimationFrame(step);
+  }
+
+  /************************************************************
+   2) EMBERS (Random Sine-Wave Drift)
+  ************************************************************/
+  const emberContainer = document.getElementById("emberContainer");
+  let emberIndex = 0;
+
+  function spawnEmber() {
+    emberIndex++;
+    const ember = document.createElement('div');
+    ember.classList.add('ember');
+    ember.style.left = (Math.random() * 100) + '%';
+
+    const maxRise = 300 + Math.random() * 400;
+    const waveCount = 0.5 + Math.random() * 1.5;
+    const amplitude = 5 + Math.random() * 10;
+    const sign      = Math.random() < 0.5 ? 1 : -1;
+
+    const animName = 'emberFloat' + emberIndex;
+    const styleEl  = document.createElement('style');
+
+    let keyframes = `@keyframes ${animName} {\n`;
+    for (let i=0; i<=100; i+=5) {
+      const frac = i/100;
+      const x = amplitude * sign * Math.sin(waveCount * 2*Math.PI * frac);
+      const y = -maxRise * frac;
+      let op = 1;
+      if (i <= 10)      op = i/10;
+      else if (i >= 90) op = 1 - (i-90)/10;
+
+      keyframes += `
+        ${i}% {
+          transform: translate(${x}px, ${y}px);
+          opacity: ${op.toFixed(2)};
+        }
+      `;
+    }
+    keyframes += '}';
+
+    styleEl.innerHTML = keyframes;
+    document.head.appendChild(styleEl);
+
+    ember.style.animation = `${animName} 5.5s linear forwards`;
+    ember.addEventListener('animationend', () => {
+      if (ember.parentNode) ember.parentNode.removeChild(ember);
+      document.head.removeChild(styleEl);
+    });
+
+    emberContainer.appendChild(ember);
+  }
+
+  setInterval(spawnEmber, 700);
+  for (let i=0; i<12; i++) spawnEmber();
+
+
+  /************************************************************
+   3) GHOSTS TABLE: SEARCH + EVIDENCE FILTER
+  ************************************************************/
+  function filterAllGhosts() {
+    const searchInput = document.getElementById("ghostSearch").value.toLowerCase();
+    const table = document.getElementById("ghostTable");
+    const tbody = table.getElementsByTagName("tbody")[0];
+    const rows = tbody.getElementsByTagName("tr");
+
+    // gather selected evidences
+    const checkboxes = document.querySelectorAll(".evidence-boxes input[type='checkbox']");
+    let selectedEvidences = [];
+    checkboxes.forEach(cb => {
+      if (cb.checked) {
+        selectedEvidences.push(cb.value.toLowerCase());
+      }
+    });
+
+    for (let i=0; i<rows.length; i++) {
+      rows[i].style.display = "";
+
+      // text search
+      const rowText = rows[i].textContent.toLowerCase();
+      if (searchInput && !rowText.includes(searchInput)) {
+        rows[i].style.display = "none";
+        continue;
+      }
+
+      // evidence filter (col 4)
+      const forcedEvidence = rows[i].getElementsByTagName("td")[4].textContent.toLowerCase();
+      for (let ev of selectedEvidences) {
+        if (!forcedEvidence.includes(ev)) {
+          rows[i].style.display = "none";
+          break;
+        }
+      }
+    }
+  }
+
+  /************************************************************
+   4) SORTING FOR GHOST TABLE
+  ************************************************************/
+  function sortGhostTable(colIndex, numeric) {
+    const table = document.getElementById("ghostTable");
+    const tbody = table.getElementsByTagName("tbody")[0];
+    let rows = Array.from(tbody.getElementsByTagName("tr"));
+
+    // track current direction for that column
+    const currentDir = table.getAttribute("data-sortdir"+colIndex) || "asc";
+    const newDir = (currentDir === "asc") ? "desc" : "asc";
+    table.setAttribute("data-sortdir"+colIndex, newDir);
+
+    rows.sort((a,b) => {
+      let x = a.getElementsByTagName("td")[colIndex].textContent.trim();
+      let y = b.getElementsByTagName("td")[colIndex].textContent.trim();
+
+      if (numeric) {
+        // parse out 'm', '%' etc.
+        x = parseFloat(x.replace(/[^\d.]/g, "")) || 0;
+        y = parseFloat(y.replace(/[^\d.]/g, "")) || 0;
+      } else {
+        x = x.toLowerCase();
+        y = y.toLowerCase();
+      }
+
+      if (newDir === "asc") {
+        return (x > y) ? 1 : (x < y) ? -1 : 0;
+      } else {
+        return (x < y) ? 1 : (x > y) ? -1 : 0;
+      }
+    });
+    rows.forEach(r => tbody.appendChild(r));
+  }
+
+  /************************************************************
+   5) SIMPLE SEARCH FOR CURSED ITEMS TABLE
+  ************************************************************/
+  function searchSimple(inputId, tableId) {
+    const input = document.getElementById(inputId).value.toLowerCase();
+    const table = document.getElementById(tableId);
+    const rows = table.getElementsByTagName("tr");
+
+    for (let i=1; i<rows.length; i++) {
+      const rowText = rows[i].textContent.toLowerCase();
+      rows[i].style.display = rowText.includes(input) ? "" : "none";
+    }
+  }
+
+  /************************************************************
+   6) DEFAULT SORT (by Name) in DESC order on page load
+  ************************************************************/
+  window.addEventListener('load', () => {
+    // Trick: set data-sortdir0 = 'asc' so next toggle becomes 'desc'
+    const ghostTable = document.getElementById('ghostTable');
+    ghostTable.setAttribute('data-sortdir0', 'asc'); 
+    // Now call sortGhostTable(0,false) 
+    // to toggle from asc -> desc.
+    sortGhostTable(0,false);
+  });
 </script>
 </body>
 </html>
