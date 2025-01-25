@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
   <meta charset="UTF-8" />
-  <title>Final - Spinning Pentagram + Softer Red Tables</title>
+  <title>Phasmo CS</title>
   <style>
     /*****************************************************
      1) DEMONIC BACKGROUND (Spinning Circle + Pentagram)
@@ -249,51 +249,318 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Example Data -->
-        <tr>
-          <td>Revenant</td>
-          <td>Extremely fast w/LOS, slow w/o</td>
-          <td>Average roam</td>
-          <td>Fast w/LOS; slow w/o</td>
-          <td></td>
-          <td>12m</td>
-          <td>1.6</td>
-          <td>5.0</td>
-          <td>50%</td>
-        </tr>
-        <tr>
-          <td>Demon</td>
-          <td>Can hunt at higher sanity</td>
-          <td>Aggressive roam</td>
-          <td>Normal</td>
-          <td>Freezing Temps</td>
-          <td>10m</td>
-          <td>1.6</td>
-          <td>1.6</td>
-          <td>70%</td>
-        </tr>
-        <tr>
-          <td>The Mimic</td>
-          <td>Copies other ghosts</td>
-          <td>Unpredictable roam</td>
-          <td>Mimics speeds</td>
-          <td>Ghost Orbs</td>
-          <td>10m</td>
-          <td>1.6</td>
-          <td>2.5</td>
-          <td>50%</td>
-        </tr>
-        <tr>
-          <td>Deogen</td>
-          <td>Always knows your location; slow near target</td>
-          <td>Rarely roams far</td>
-          <td>Fast far; slow close</td>
-          <td>Spirit Box</td>
-          <td>20m</td>
-          <td>1.6</td>
-          <td>3.5</td>
-          <td>40%</td>
-        </tr>
+        <!-- SPIRIT -->
+<tr>
+  <td>Spirit</td>
+  <td>No special abilities; smudge sticks last longer against it</td>
+  <td>Normal roam</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>50%</td>
+</tr>
+
+<!-- WRAITH -->
+<tr>
+  <td>Wraith</td>
+  <td>Avoids salt footsteps; can teleport to players randomly</td>
+  <td>Teleport-based roam</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>50%</td>
+</tr>
+
+<!-- PHANTOM -->
+<tr>
+  <td>Phantom</td>
+  <td>Looking at it drains sanity faster; vanishes on photo</td>
+  <td>Normal roam</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>50%</td>
+</tr>
+
+<!-- POLTERGEIST -->
+<tr>
+  <td>Poltergeist</td>
+  <td>Throws multiple objects at once; throw freq. is high</td>
+  <td>Normal roam</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>50%</td>
+</tr>
+
+<!-- BANSHEE -->
+<tr>
+  <td>Banshee</td>
+  <td>Stalks 1 target; hunts from range if target is inside</td>
+  <td>Target-focused roam</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>50%</td>
+</tr>
+
+<!-- JINN -->
+<tr>
+  <td>Jinn</td>
+  <td>Faster if far away & breaker on; territorial near breaker</td>
+  <td>Territorial roam (breaker area)</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>Up to ~2.5 (line-of-sight far distance)</td>
+  <td>50%</td>
+</tr>
+
+<!-- MARE -->
+<tr>
+  <td>Mare</td>
+  <td>More likely to hunt in dark; hates lights turned on</td>
+  <td>Prefers dark rooms</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>60% / 40% (dark / lit)</td>
+</tr>
+
+<!-- REVENANT -->
+<tr>
+  <td>Revenant</td>
+  <td>Extremely fast w/ line-of-sight; very slow w/o it</td>
+  <td>Normal roam</td>
+  <td>Slow</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.0</td>
+  <td>Up to ~3.0 (line-of-sight)</td>
+  <td>50%</td>
+</tr>
+
+<!-- SHADE -->
+<tr>
+  <td>Shade</td>
+  <td>Very shy & quiet; fewer hunts w/ people nearby</td>
+  <td>Less roam w/ players close</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>50%</td>
+</tr>
+
+<!-- DEMON (UPDATED) -->
+<tr>
+  <td>Demon</td>
+  <td>Frequent hunts; can hunt from 70% avg sanity; special ability hunts at 100% & larger crucifix range (~5m)</td>
+  <td>Aggressive roam</td>
+  <td>Normal</td>
+  <td></td> <!-- No forced evidence for Demon -->
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>70% / 100%</td>
+</tr>
+
+<!-- YUREI -->
+<tr>
+  <td>Yurei</td>
+  <td>Can slam doors & significantly lower sanity w/ ability</td>
+  <td>Normal roam</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>50%</td>
+</tr>
+
+<!-- ONI -->
+<tr>
+  <td>Oni</td>
+  <td>More visible hunts; highly active when people around</td>
+  <td>Aggressive roam</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>50%</td>
+</tr>
+
+<!-- YOKAI -->
+<tr>
+  <td>Yokai</td>
+  <td>Hunts if players talk near it (higher sanity threshold)</td>
+  <td>Attracted to voices</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>80% / 50% (talking / silent)</td>
+</tr>
+
+<!-- HANTU -->
+<tr>
+  <td>Hantu</td>
+  <td>Moves faster in colder rooms; slower in warm</td>
+  <td>Normal roam</td>
+  <td>Temp-based</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>~1.4 - 2.7</td>
+  <td>~1.4 - 2.7 (depending on room temp)</td>
+  <td>50%</td>
+</tr>
+
+<!-- GORYO -->
+<tr>
+  <td>Goryo</td>
+  <td>DOTS only visible on cam & from far; rarely leaves room</td>
+  <td>Minimal roam from its room</td>
+  <td>Normal</td>
+  <td></td> <!-- Goryo does NOT have truly forced DOTS in no-evidence mode -->
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>50%</td>
+</tr>
+
+<!-- MYLING -->
+<tr>
+  <td>Myling</td>
+  <td>Quieter footsteps & more frequent vocal sounds on paramic</td>
+  <td>Normal roam</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>50%</td>
+</tr>
+
+<!-- ONRYO -->
+<tr>
+  <td>Onryo</td>
+  <td>Early hunts if flame is extinguished near it</td>
+  <td>Normal roam</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>50% / 60% (flame out)</td>
+</tr>
+
+<!-- THE TWINS -->
+<tr>
+  <td>The Twins</td>
+  <td>Two entities: main ghost & decoy w/ separate interactions</td>
+  <td>Dual roam</td>
+  <td>Normal & slight variant</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6 & 1.5</td>
+  <td>1.6 & 1.7</td>
+  <td>50%</td>
+</tr>
+
+<!-- RAIJU -->
+<tr>
+  <td>Raiju</td>
+  <td>Faster near active electronics; stronger EMF interference</td>
+  <td>Drawn to electronics</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>Up to ~2.5 (w/ electronics)</td>
+  <td>50% / 65%</td>
+</tr>
+
+<!-- OBAKE -->
+<tr>
+  <td>Obake</td>
+  <td>Fingerprints fade quickly; rare 6-finger print; shapeshift events</td>
+  <td>Normal roam</td>
+  <td>Normal</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6</td>
+  <td>1.6</td>
+  <td>50%</td>
+</tr>
+
+<!-- THE MIMIC (FORCED EVIDENCE) -->
+<tr>
+  <td>The Mimic</td>
+  <td>Copies other ghost abilities; ALWAYS has ghost orbs</td>
+  <td>Varies (mimics target ghost)</td>
+  <td>Varies</td>
+  <td>Ghost Orbs <!-- The Mimic has forced orbs in any mode --></td>
+  <td>1.5m / 3.0m</td>
+  <td>Varies</td>
+  <td>Varies</td>
+  <td>Varies</td>
+</tr>
+
+<!-- MOROI -->
+<tr>
+  <td>Moroi</td>
+  <td>Curses players via Spirit Box; speeds up as average sanity drops</td>
+  <td>Normal roam</td>
+  <td>Faster w/ lower sanity</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>~1.5 (base)</td>
+  <td>Up to ~2.25 at 0% sanity</td>
+  <td>50%</td>
+</tr>
+
+<!-- DEOGEN -->
+<tr>
+  <td>Deogen</td>
+  <td>Knows your location always; very slow up close, faster far</td>
+  <td>Pinpoint roam</td>
+  <td>Variable</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>~1.6 (avg)</td>
+  <td>~0.4 - 3.0 (distance-based)</td>
+  <td>40%</td>
+</tr>
+
+<!-- THAYE -->
+<tr>
+  <td>Thaye</td>
+  <td>Starts very active & fast; ages/weaker over time</td>
+  <td>Active early roam</td>
+  <td>Decreases over time</td>
+  <td></td>
+  <td>1.5m / 3.0m</td>
+  <td>1.6 (initial)</td>
+  <td>~1.0 final (aged)</td>
+  <td>75% / 15% (longer present)</td>
+</tr>
+
       </tbody>
     </table>
   </div>
