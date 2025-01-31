@@ -5,249 +5,66 @@
   <meta charset="UTF-8" />
   <title>PhaCS</title>
   <style>
-    /*****************************************************
-     1) DEMONIC BACKGROUND (Spinning Circle + Pentagram)
-    *****************************************************/
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      position: relative;
-      /* We'll handle scroll hiding/showing via JS. */
-      font-family: Arial, sans-serif;
-      color: #fff;
-      background: #000;
-    }
-
-    .symbol-container {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 400px;
-      height: 400px;
-      transform: translate(-50%, -50%);
-      z-index: 1;
-    }
-    svg#bloodSymbol {
-      width: 100%;
-      height: 100%;
-    }
-    .rotateGroup {
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: rotatePentagram 20s linear infinite;
-    }
-    @keyframes rotatePentagram {
-      0%   { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .blood-line {
-      fill: none;
-      stroke: #b00;
-      stroke-width: 10;
-      stroke-linejoin: round;
-      stroke-linecap: round;
-      filter: blur(2px);
-      animation: flameFlicker 5s infinite ease-in-out;
-    }
-    @keyframes flameFlicker {
-      0%   { stroke: #b00; opacity: 0; filter: blur(5px); }
-      50%  { stroke: #c00; opacity: 1;   filter: blur(2px); }
-      100% { stroke: #b00; opacity: 0; filter: blur(5px); }
-    }
-
-    /*****************************************************
-     2) DRIFTING EMBERS (random sine wave)
-    *****************************************************/
-    .embers {
-      position: fixed;
-      /* Cover from top to bottom of the body’s full height */
-      top: 0; 
-      left: 0; 
-      right: 0; 
-      bottom: 0;
-      pointer-events: none;
-      z-index: 0; /* behind your tables, etc. */
-    }
-    .ember {
-      position: absolute;
-      bottom: 0;
-      width: 3px; height: 3px;
-      background: #c04000;
-      border-radius: 50%;
-      opacity: 0;
-    }
-
-    /*****************************************************
-     3) TABLE WRAPPER (90% wide on large, no border, etc.)
-    *****************************************************/
-    .table-wrapper {
-      position: relative;
-      z-index: 2;
-      width: 90%;
-      max-width: 1200px;
-      margin: 20px auto 40px auto;
-      padding: 20px;
-      background: rgba(0,0,0,0.4);
-      border-radius: 8px;
-    }
-
-    .table-wrapper h1 {
-      text-align: center;
-      margin-bottom: 10px;
-      color: #f00;
-      text-shadow: 0 0 5px #f00;
-    }
-
-    .filters {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .search-box {
-      margin-bottom: 8px;
-    }
-    .search-box input {
-      width: 60%;
-      max-width: 300px;
-      padding: 6px;
-      border-radius: 4px;
-      border: 1px solid #900;
-      outline: none;
-      background: #200;
-      color: #fdd;
-    }
-    .evidence-boxes {
-      margin-top: 5px;
-    }
-    .evidence-boxes label {
-      margin-right: 10px;
-      cursor: pointer;
-    }
-    .evidence-boxes input[type="checkbox"] {
-      margin-right: 4px;
-    }
-
-    /*****************************************************
-     4) RED TABLE (LESS RIGID)
-    *****************************************************/
-    .red-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0 6px; /* row gaps */
-      background: rgba(0,0,0,0.3);
-    }
-    .red-table th, .red-table td {
-      border: none;  /* no rigid borders */
-      padding: 8px 10px;
-      text-align: left;
-      color: #fff;
-    }
-    .red-table thead tr {
-      background: #600; /* dark red header row */
-    }
-    .red-table th {
-      cursor: pointer;
-      text-shadow: 0 0 2px #f00;
-    }
-    .red-table tbody tr {
-      border-radius: 6px;
-    }
-    .red-table tr:nth-child(even) {
-      background: rgba(200,0,0,0.2); 
-    }
-    .red-table tr:nth-child(odd) {
-      background: rgba(100,0,0,0.2);
-    }
-    .red-table tr:hover td {
-      background: rgba(255,0,0,0.2);
-    }
-    .sortable::after {
-      content: " \25B2\25BC";
-      font-size: 0.7em;
-      color: #888;
-      margin-left: 5px;
-    }
-
-    /*****************************************************
-     5) MOBILE-FRIENDLY 
-       - Larger search boxes 
-       - smaller table text
-    *****************************************************/
-    @media (max-width: 768px) {
-      .search-box input {
-        width: 90%;
-        font-size: 16px;
-        padding: 10px;
-      }
-      th, td {
-        padding: 6px;
-        font-size: 14px;
-      }
-    }
+    html,body{margin:0;padding:0;width:100%;position:relative;font-family:Arial,sans-serif;color:#fff;background:#000;}
+    .symbol-container{position:fixed;top:50%;left:50%;width:400px;height:400px;transform:translate(-50%,-50%);z-index:1;}
+    .rotateGroup{transform-box:fill-box;transform-origin:center;animation:spin 20s linear infinite;}
+    @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+    .blood-line{fill:none;stroke:#b00;stroke-width:10;stroke-linejoin:round;stroke-linecap:round;filter:blur(2px);animation:flame 5s infinite ease-in-out;}
+    @keyframes flame{0%{stroke:#b00;opacity:0;filter:blur(5px);}50%{stroke:#c00;opacity:1;filter:blur(2px);}100%{stroke:#b00;opacity:0;filter:blur(5px);}}
+    .embers{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;}
+    .ember{position:absolute;bottom:0;width:3px;height:3px;background:#c04000;border-radius:50%;opacity:0;}
+    .table-wrapper{position:relative;z-index:2;width:90%;max-width:1200px;margin:20px auto;padding:20px;background:rgba(0,0,0,0.4);border-radius:8px;}
+    .table-wrapper h1{text-align:center;margin-bottom:10px;color:#f00;text-shadow:0 0 5px #f00;}
+    .filters{text-align:center;margin-bottom:10px;}
+    .search-box input{width:60%;max-width:300px;padding:6px;border-radius:4px;border:1px solid #900;outline:none;background:#200;color:#fdd;}
+    .evidence-boxes{margin-top:5px;}
+    .toggle-ruled-btn{background:#400;color:#fff;border:1px solid #900;padding:6px 12px;margin-top:8px;border-radius:4px;cursor:pointer;font-weight:bold;text-shadow:0 0 2px #f00;display:inline-block;}
+    .toggle-ruled-btn:hover{background:#600;}
+    .red-table{width:100%;border-collapse:separate;border-spacing:0 6px;background:rgba(0,0,0,0.3);}
+    .red-table th,.red-table td{border:none;padding:8px 10px;text-align:left;color:#fff;}
+    .red-table thead tr{background:#600;}
+    .red-table th{cursor:pointer;text-shadow:0 0 2px #f00;}
+    .red-table tbody tr{border-radius:6px;position:relative;}
+    .red-table tr:nth-child(even){background:rgba(200,0,0,0.2);}
+    .red-table tr:nth-child(odd){background:rgba(100,0,0,0.2);}
+    .red-table tr:hover td{background:rgba(255,0,0,0.2);}
+    .sortable::after{content:" \25B2\25BC";font-size:0.7em;color:#888;margin-left:5px;}
+    .ruled-out{background-color:#444!important;color:#aaa;}
+    .ruled-out:hover td{background:none!important;}
+    .ruled-out::after{content:"";position:absolute;left:0;top:50%;width:100%;height:12px;pointer-events:none;transform:translateY(-50%);background:var(--randomSlash) no-repeat center;background-size:100% 100%;opacity:0.8;}
+    @media(max-width:768px){.search-box input{width:90%;font-size:16px;padding:10px;}th,td{padding:6px;font-size:14px;}}
   </style>
 </head>
 <body>
-  <!-- Spinning Pentagram in Center -->
   <div class="symbol-container">
     <svg id="bloodSymbol" viewBox="0 0 200 200">
       <g class="rotateGroup">
-        <circle id="circlePath" class="blood-line" cx="100" cy="100" r="90" />
-        <path id="starPath" class="blood-line"
-          d="M100,10 
-             L152.9,172.81 
-             L14.4,72.19 
-             L185.6,72.19 
-             L47.1,172.81 
-             Z"
-        />
+        <circle id="circlePath" class="blood-line" cx="100" cy="100" r="90"/>
+        <path id="starPath" class="blood-line" d="M100,10 L152.9,172.81 L14.4,72.19 L185.6,72.19 L47.1,172.81 Z"/>
       </g>
     </svg>
   </div>
 
-  <!-- Drifting Embers -->
   <div class="embers" id="emberContainer"></div>
-  <!-- GHOSTS TABLE -->
+
+  <!-- Ghosts Table -->
   <div class="table-wrapper">
     <h1>Ghosts Table</h1>
     <div class="filters">
-      <!-- Search -->
       <div class="search-box">
-        <input 
-          type="text" 
-          id="ghostSearch" 
-          placeholder="Search Ghosts..."
-          onkeyup="filterAllGhosts()"
-        />
+        <input type="text" id="ghostSearch" placeholder="Search Ghosts..." onkeyup="filterAllGhosts()"/>
       </div>
-      <!-- Evidence Checkboxes -->
       <div class="evidence-boxes">
-        <label>
-          <input type="checkbox" value="D.O.T.S." onclick="filterAllGhosts()" />
-          D.O.T.S.
-        </label>
-        <label>
-          <input type="checkbox" value="EMF" onclick="filterAllGhosts()" />
-          EMF
-        </label>
-        <label>
-          <input type="checkbox" value="Freezing Temps" onclick="filterAllGhosts()" />
-          Freezing Temps
-        </label>
-        <label>
-          <input type="checkbox" value="Ghost Orb" onclick="filterAllGhosts()" />
-          Ghost Orb
-        </label>
-        <label>
-          <input type="checkbox" value="Ghost Writing" onclick="filterAllGhosts()" />
-          Ghost Writing
-        </label>
-        <label>
-          <input type="checkbox" value="Spirit Box" onclick="filterAllGhosts()" />
-          Spirit Box
-        </label>
+        <label><input type="checkbox" value="D.O.T.S." onclick="filterAllGhosts()"/>D.O.T.S.</label>
+        <label><input type="checkbox" value="EMF" onclick="filterAllGhosts()"/>EMF</label>
+        <label><input type="checkbox" value="Freezing Temps" onclick="filterAllGhosts()"/>Freezing Temps</label>
+        <label><input type="checkbox" value="Ghost Orb" onclick="filterAllGhosts()"/>Ghost Orb</label>
+        <label><input type="checkbox" value="Ghost Writing" onclick="filterAllGhosts()"/>Ghost Writing</label>
+        <label><input type="checkbox" value="Spirit Box" onclick="filterAllGhosts()"/>Spirit Box</label>
       </div>
+      <button id="hideButton" class="toggle-ruled-btn" onclick="toggleHideRuledOut()">Hide Ruled Out</button>
     </div>
+
     <table class="red-table" id="ghostTable">
       <thead>
         <tr>
@@ -257,14 +74,15 @@
           <th>Footstep Speed</th>
           <th class="sortable" onclick="sortGhostTable(4,false)">Forced Evidence</th>
           <th>Evidence</th>
-          <th class="sortable" onclick="sortGhostTable(6,true)">Interaction Range</th>
-          <th class="sortable" onclick="sortGhostTable(7,true)">Base Speed</th>
-          <th class="sortable" onclick="sortGhostTable(8,true)">Mod. Speed</th>
+          <th class="sortable" onclick="sortGhostTable(6,true)">Range</th>
+          <th class="sortable" onclick="sortGhostTable(7,true)">Base</th>
+          <th class="sortable" onclick="sortGhostTable(8,true)">Mod</th>
           <th class="sortable" onclick="sortGhostTable(9,true)">Hunt %</th>
+          <!-- NEW Keywords column -->
+          <th>Keywords</th>
         </tr>
       </thead>
       <tbody>
-        <!-- SPIRIT -->
 <tr>
   <td>Spirit</td>
   <td>Smudge sticks last longer against it</td>
@@ -276,6 +94,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>50%</td>
+  <td></td>
 </tr>
 
 <!-- WRAITH -->
@@ -290,6 +109,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>50%</td>
+  <td> Salt, Stalk, Teleport, EMF</td>
 </tr>
 
 <!-- PHANTOM -->
@@ -304,6 +124,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>50%</td>
+  <td>Camera, Photo, Stalk, Sanity Drain</td>
 </tr>
 
 <!-- POLTERGEIST -->
@@ -318,6 +139,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>50%</td>
+  <td>Throw, Object, Item</td>
 </tr>
 
 <!-- BANSHEE -->
@@ -332,6 +154,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>50%</td>
+  <td>Stalk, Singing, Humming, Sound, Parabolic Microphone</td>
 </tr>
 
 <!-- JINN -->
@@ -346,6 +169,7 @@
   <td>1.6</td>
   <td>2.5 (up to, line-of-sight / long distance)</td>
   <td>50%</td>
+  <td>Territorial, Breaker, Sanity</td>
 </tr>
 
 <!-- MARE -->
@@ -360,6 +184,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>60% / 40% (light / dark)</td>
+  <td>Dark, Light</td>
 </tr>
 
 <!-- REVENANT -->
@@ -374,6 +199,7 @@
   <td>1.0</td>
   <td>3.0 (up to, line-of-sight)</td>
   <td>50%</td>
+  <td></td>
 </tr>
 
 <!-- SHADE -->
@@ -388,6 +214,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>35%</td>
+  <td></td>
 </tr>
 
 <!-- DEMON -->
@@ -402,6 +229,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>100% / 70% (rare ability / normal)</td>
+  <td>Early hunt</td>
 </tr>
 
 <!-- YUREI -->
@@ -416,6 +244,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>50%</td>
+  <td></td>
 </tr>
 
 <!-- ONI -->
@@ -430,6 +259,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>50%</td>
+  <td>Blinking, Visible</td>
 </tr>
 
 <!-- YOKAI -->
@@ -444,6 +274,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>80% / 50% (talking / silent)</td>
+  <td>Talking, Early Hunt</td>
 </tr>
 
 <!-- HANTU -->
@@ -458,6 +289,7 @@
   <td>1.4 - 2.7 (depending on room temp)</td>
   <td>1.4 - 2.7 (depending on room temp)</td>
   <td>50%</td>
+  <td>Temperature, Temp </td>
 </tr>
 
 <!-- GORYO -->
@@ -472,6 +304,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>50%</td>
+  <td></td>
 </tr>
 
 <!-- MYLING -->
@@ -486,6 +319,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>50%</td>
+  <td></td>
 </tr>
 
 <!-- ONRYO -->
@@ -500,6 +334,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>60% / 50% (flame out)</td>
+  <td></td>
 </tr>
 
 <!-- THE TWINS -->
@@ -514,6 +349,7 @@
   <td>1.6 & 1.5</td>
   <td>1.6 & 1.7</td>
   <td>50%</td>
+  <td></td>
 </tr>
 
 <!-- RAIJU -->
@@ -528,6 +364,7 @@
   <td>1.6</td>
   <td>2.5 (up to, w/ electronics)</td>
   <td>65% / 50% (near electronics / no electronics</td>
+  <td></td>
 </tr>
 
 <!-- OBAKE -->
@@ -542,6 +379,7 @@
   <td>1.6</td>
   <td>1.6</td>
   <td>50%</td>
+  <td></td>
 </tr>
 
 <!-- THE MIMIC (FORCED EVIDENCE) -->
@@ -556,6 +394,7 @@
   <td>Varies</td>
   <td>Varies</td>
   <td>Varies</td>
+  <td></td>
 </tr>
 
 <!-- MOROI -->
@@ -570,6 +409,7 @@
   <td>1.5 (at max sanity)</td>
   <td>2.25 (up to, at 0% sanity</td>
   <td>50%</td>
+  <td></td>
 </tr>
 
 <!-- DEOGEN -->
@@ -584,6 +424,7 @@
   <td>1.6 (avg)</td>
   <td>3.0 - 0.4 (distance-based)</td>
   <td>40%</td>
+  <td></td>
 </tr>
 
 <!-- THAYE -->
@@ -598,38 +439,31 @@
   <td>1.6 (initial)</td>
   <td>1.0 (final ()</td>
   <td>75% / 15% (declines over time)</td>
+  <td></td>
 </tr>
 
       </tbody>
     </table>
   </div>
 
-  <!-- CURSED ITEMS TABLE -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Cursed Items Table -->
   <div class="table-wrapper">
     <h1>Cursed Items Table</h1>
     <div class="search-box" style="text-align:center;">
-      <input 
-        type="text"
-        id="cursedSearch"
-        placeholder="Search Cursed Items..."
-        onkeyup="searchSimple('cursedSearch','cursedTable')"
-      />
+      <input type="text" id="cursedSearch" placeholder="Search Cursed Items..." onkeyup="searchSimple('cursedSearch','cursedTable')"/>
     </div>
     <table class="red-table" id="cursedTable">
       <thead>
         <tr>
-          <th>Map</th>
-          <th>Ouija Board</th>
-          <th>Music Box</th>
-          <th>Tarot Cards</th>
-          <th>Summoning Circle</th>
-          <th>Haunted Mirror</th>
-          <th>Voodoo Doll</th>
-          <th>Monkey Paw</th>
+          <th>Map</th><th>Ouija Board</th><th>Music Box</th><th>Tarot Cards</th>
+          <th>Summoning Circle</th><th>Haunted Mirror</th><th>Voodoo Doll</th><th>Monkey Paw</th>
         </tr>
       </thead>
       <tbody>
-        <!-- TANGLEWOOD (provided example) -->
 <tr>
   <td>6 Tanglewood Drive</td>
   <td>Basement table</td>
@@ -641,7 +475,6 @@
   <td>Living Room case</td>
 </tr>
 
-<!-- EDGEFIELD -->
 <tr>
   <td>42 Edgefield Road</td>
   <td>Basement storage (under stairs)</td>
@@ -653,7 +486,6 @@
   <td>2F hallway table</td>
 </tr>
 
-<!-- RIDGEVIEW -->
 <tr>
   <td>10 Ridgeview Court</td>
   <td>Basement shelf near stairs</td>
@@ -665,7 +497,6 @@
   <td>1F office desk</td>
 </tr>
 
-<!-- WILLOW -->
 <tr>
   <td>13 Willow Street</td>
   <td>Basement shelf (hallway)</td>
@@ -677,7 +508,6 @@
   <td>Garage shelf near door</td>
 </tr>
 
-<!-- GRAFTON -->
 <tr>
   <td>Grafton Farmhouse</td>
   <td>Utility side room (1F)</td>
@@ -689,7 +519,6 @@
   <td>Bench near front door</td>
 </tr>
 
-<!-- BLEASDALE -->
 <tr>
   <td>Bleasdale Farmhouse</td>
   <td>1F workshop shelf</td>
@@ -701,7 +530,6 @@
   <td>2F bedroom closet</td>
 </tr>
 
-<!-- BROWNSTONE HIGH SCHOOL -->
 <tr>
   <td>Brownstone High School</td>
   <td>Main foyer bench</td>
@@ -713,7 +541,6 @@
   <td>Right wing hallway locker</td>
 </tr>
 
-<!-- PRISON -->
 <tr>
   <td>Prison</td>
   <td>Visitation area bench</td>
@@ -725,7 +552,6 @@
   <td>Block B shelf</td>
 </tr>
 
-<!-- MAPLE LODGE CAMPSITE -->
 <tr>
   <td>Maple Lodge Campsite</td>
   <td>Lobby building front counter</td>
@@ -737,7 +563,6 @@
   <td>Lodge 1F side shelf</td>
 </tr>
 
-<!-- CAMP WOODWIND -->
 <tr>
   <td>Camp Woodwind</td>
   <td>Picnic table near tents</td>
@@ -749,7 +574,6 @@
   <td>Cornhole game area shelf</td>
 </tr>
 
-<!-- SUNNY MEADOWS (Asylum) -->
 <tr>
   <td>Sunny Meadows</td>
   <td>Lobby reception desk</td>
@@ -761,7 +585,6 @@
   <td>Chapel front pew bench</td>
 </tr>
 
-<!-- SUNNY MEADOWS RESTRICTED -->
 <tr>
   <td>Sunny Meadows (Restricted)</td>
   <td>Random wing reception desk</td>
@@ -772,228 +595,125 @@
   <td>Side patient room bed</td>
   <td>Hall bench (accessible area)</td>
 </tr>
-
       </tbody>
     </table>
   </div>
 
 <script>
-  /************************************************************
-   1) DRAW THE CIRCLE THEN THE PENTAGRAM
-  ************************************************************/
-  const circlePath = document.getElementById("circlePath");
-  const starPath   = document.getElementById("starPath");
-
-  const circleLen = circlePath.getTotalLength();
-  const starLen   = starPath.getTotalLength();
-
-  circlePath.style.strokeDasharray  = circleLen;
-  circlePath.style.strokeDashoffset = circleLen;
-  starPath.style.strokeDasharray    = starLen;
-  starPath.style.strokeDashoffset   = starLen;
-
-  drawPath(circlePath, circleLen, 2000, () => {
-    drawPath(starPath, starLen, 3000);
-  });
-
-  function drawPath(pathElem, totalLen, duration, onComplete) {
-    let start = null;
-    function step(timestamp) {
-      if (!start) start = timestamp;
-      let progress = timestamp - start;
-      let fraction = Math.min(progress / duration, 1);
-      pathElem.style.strokeDashoffset = totalLen * (1 - fraction);
-      if (fraction < 1) {
-        requestAnimationFrame(step);
-      } else if (onComplete) {
-        onComplete();
-      }
-    }
-    requestAnimationFrame(step);
-  }
-
-  /************************************************************
-   2) EMBERS (Random Sine-Wave Drift)
-  ************************************************************/
-  const emberContainer = document.getElementById("emberContainer");
-  let emberIndex = 0;
-
-  function spawnEmber() {
-    emberIndex++;
-    const ember = document.createElement('div');
-    ember.classList.add('ember');
-    ember.style.left = (Math.random() * 100) + '%';
-
-    const maxRise = 300 + Math.random() * 400;
-    const waveCount = 0.5 + Math.random() * 1.5;
-    const amplitude = 5 + Math.random() * 10;
-    const sign      = Math.random() < 0.5 ? 1 : -1;
-
-    const animName = 'emberFloat' + emberIndex;
-    const styleEl  = document.createElement('style');
-
-    let keyframes = `@keyframes ${animName} {\n`;
-    for (let i=0; i<=100; i+=2) {
-      const frac = i/100;
-      const x = amplitude * sign * Math.sin(waveCount * 2*Math.PI * frac);
-      const y = -maxRise * frac;
-      let op = 1;
-      if (i <= 10)      op = i/10;
-      else if (i >= 90) op = 1 - (i-90)/10;
-
-      keyframes += `
-        ${i}% {
-          transform: translate(${x}px, ${y}px);
-          opacity: ${op.toFixed(2)};
-        }
-      `;
-    }
-    keyframes += '}';
-
-    styleEl.innerHTML = keyframes;
-    document.head.appendChild(styleEl);
-
-    ember.style.animation = `${animName} 5.5s linear forwards`;
-    ember.addEventListener('animationend', () => {
-      if (ember.parentNode) ember.parentNode.removeChild(ember);
-      document.head.removeChild(styleEl);
-    });
-
-    emberContainer.appendChild(ember);
-  }
-
-  // spawn embers
-  setInterval(spawnEmber, 75);
-  for (let i=0; i<25; i++) spawnEmber();
-
-  /************************************************************
-   3) GHOSTS TABLE: SEARCH + EVIDENCE FILTER
-  ************************************************************/
-function filterAllGhosts() {
-  const searchInput = document.getElementById("ghostSearch").value.toLowerCase();
-  const table = document.getElementById("ghostTable");
-  const tbody = table.getElementsByTagName("tbody")[0];
-  const rows = tbody.getElementsByTagName("tr");
-
-  // Collect the user-checked evidence from checkboxes
-  const checkboxes = document.querySelectorAll(".evidence-boxes input[type='checkbox']");
-  let selectedEvidences = [];
-  checkboxes.forEach(cb => {
-    if (cb.checked) {
-      selectedEvidences.push(cb.value.toLowerCase());
-    }
-  });
-
-  for (let i = 0; i < rows.length; i++) {
-    // Start by showing the row; we’ll hide it if it fails any test
-    rows[i].style.display = "";
-
-    // 1) Filter by text search
-    const rowText = rows[i].textContent.toLowerCase();
-    if (searchInput && !rowText.includes(searchInput)) {
-      rows[i].style.display = "none";
-      continue; // move to next row
-    }
-
-    // 2) Filter by evidence
-    //    col 4 = forced evidence, col 5 = normal evidence
-    const forcedEvidence = rows[i].getElementsByTagName("td")[4].textContent.toLowerCase();
-    const allEvidence    = rows[i].getElementsByTagName("td")[5].textContent.toLowerCase();
-
-    // For each user-checked evidence, confirm it’s in EITHER forced or normal
-    for (let ev of selectedEvidences) {
-      if (!forcedEvidence.includes(ev) && !allEvidence.includes(ev)) {
-        // This means the row does NOT have the needed evidence in forced or normal
-        rows[i].style.display = "none";
-        break; // no need to check more evidences for this row
-      }
-    }
-  }
+/* Draw circle+pentagram */
+const c=document.getElementById("circlePath"), s=document.getElementById("starPath");
+if(c&&s){let cl=c.getTotalLength(),sl=s.getTotalLength();
+ c.style.strokeDasharray=cl; c.style.strokeDashoffset=cl;
+ s.style.strokeDasharray=sl; s.style.strokeDashoffset=sl;
+ drawPath(c,cl,2000,()=>drawPath(s,sl,3000));
+}
+function drawPath(el,total,dur,cb){
+ let st=null;function step(t){if(!st)st=t;let p=t-st,f=Math.min(p/dur,1);
+ el.style.strokeDashoffset=total*(1-f); if(f<1)requestAnimationFrame(step);else if(cb)cb();}
+ requestAnimationFrame(step);
 }
 
-
-  /************************************************************
-   4) SORTING FOR GHOST TABLE
-  ************************************************************/
-  function sortGhostTable(colIndex, numeric) {
-    const table = document.getElementById("ghostTable");
-    const tbody = table.getElementsByTagName("tbody")[0];
-    let rows = Array.from(tbody.getElementsByTagName("tr"));
-
-    const currentDir = table.getAttribute("data-sortdir"+colIndex) || "asc";
-    const newDir = (currentDir === "asc") ? "desc" : "asc";
-    table.setAttribute("data-sortdir"+colIndex, newDir);
-
-    rows.sort((a,b) => {
-      let x = a.getElementsByTagName("td")[colIndex].textContent.trim();
-      let y = b.getElementsByTagName("td")[colIndex].textContent.trim();
-
-      if (numeric) {
-        x = parseFloat(x.replace(/[^\d.]/g, "")) || 0;
-        y = parseFloat(y.replace(/[^\d.]/g, "")) || 0;
-      } else {
-        x = x.toLowerCase();
-        y = y.toLowerCase();
-      }
-
-      if (newDir === "asc") {
-        return (x > y) ? 1 : (x < y) ? -1 : 0;
-      } else {
-        return (x < y) ? 1 : (x > y) ? -1 : 0;
-      }
-    });
-    rows.forEach(r => tbody.appendChild(r));
+/* Embers */
+const emberC=document.getElementById("emberContainer");
+if(emberC){
+ let i=0;function spawn(){i++;let e=document.createElement('div');e.className='ember';e.style.left=(Math.random()*100)+'%';
+  let mr=300+Math.random()*400,wc=0.5+Math.random()*1.5,amp=5+Math.random()*10,sg=Math.random()<0.5?1:-1,an='emberFloat'+i,se=document.createElement('style'),
+  kf=`@keyframes ${an}{`;
+  for(let n=0;n<=100;n+=2){
+    let frac=n/100,x=amp*sg*Math.sin(wc*2*Math.PI*frac), y=-mr*frac,op=1;
+    if(n<=10)op=n/10; else if(n>=90)op=1-(n-90)/10;
+    kf+=`${n}%{transform:translate(${x}px,${y}px);opacity:${op.toFixed(2)};} `;
   }
+  kf+='}'; se.innerHTML=kf; document.head.appendChild(se);
+  e.style.animation=`${an} 5.5s linear forwards`;
+  e.addEventListener('animationend',()=>{if(e.parentNode)e.parentNode.removeChild(e);document.head.removeChild(se);});
+  emberC.appendChild(e);
+ }
+ setInterval(spawn,75);for(let z=0;z<25;z++)spawn();
+}
 
-  /************************************************************
-   5) SIMPLE SEARCH FOR CURSED ITEMS
-  ************************************************************/
-  function searchSimple(inputId, tableId) {
-    const input = document.getElementById(inputId).value.toLowerCase();
-    const table = document.getElementById(tableId);
-    const rows = table.getElementsByTagName("tr");
-
-    for (let i=1; i<rows.length; i++) {
-      const rowText = rows[i].textContent.toLowerCase();
-      rows[i].style.display = rowText.includes(input) ? "" : "none";
-    }
-  }
-
-  /************************************************************
-   6) DEFAULT SORT BY NAME (DESC from A to Z top->bottom) ON LOAD
-  ************************************************************/
-  window.addEventListener('load', () => {
-    // We'll interpret "descending so from A at top to Z at bottom" 
-    // as standard alphabetical ascending. 
-    // We'll do a trick to ensure we end up w/ 'desc' from the code's viewpoint
-    // so the final visual is A->Z top to bottom.
-    const ghostTable = document.getElementById('ghostTable');
-    // Force next toggle on col 0 to be asc
-    ghostTable.setAttribute('data-sortdir0','desc'); 
-    // Now calling sort triggers newDir = 'asc' => "A to Z" top->bottom
-    sortGhostTable(0,false);
-
-    checkScroll();
+/* Filter ghosts */
+function filterAllGhosts(){
+  const q=document.getElementById("ghostSearch").value.toLowerCase(),
+  tab=document.getElementById("ghostTable"); if(!tab)return;
+  const rows=tab.querySelector("tbody").querySelectorAll("tr");
+  let cbs=document.querySelectorAll(".evidence-boxes input[type='checkbox']"),sel=[];
+  cbs.forEach(c=>{if(c.checked)sel.push(c.value.toLowerCase());});
+  rows.forEach(r=>{
+    r.style.display=""; let txt=r.textContent.toLowerCase();
+    if(q&&!txt.includes(q)){r.style.display="none";return;}
+    let fEv=r.cells[4].textContent.toLowerCase(), aEv=r.cells[5].textContent.toLowerCase();
+    for(let ev of sel)if(!fEv.includes(ev)&&!aEv.includes(ev)){r.style.display="none";break;}
   });
+}
 
-  /************************************************************
-   7) SHOW/HIDE SCROLLBAR ON DESKTOP IF CONTENT FITS
-      On mobile, always enable scroll
-  ************************************************************/
-  window.addEventListener('resize', checkScroll);
-  function checkScroll() {
-    // if mobile, always show auto
-    if (window.innerWidth <= 768) {
-      document.body.style.overflowY = 'auto';
-      return;
-    }
-    // desktop
-    if (document.body.scrollHeight > window.innerHeight) {
-      document.body.style.overflowY = 'auto';  // content > screen => scroll
-    } else {
-      document.body.style.overflowY = 'hidden'; // content fits => hide scrollbar
-    }
-  }
+/* Sort ghosts (cols 0,4,6,7,8,9 remain correct) */
+function sortGhostTable(ci,num){
+  const t=document.getElementById("ghostTable"); if(!t)return;
+  const tb=t.querySelector("tbody"), rows=Array.from(tb.querySelectorAll("tr"));
+  let cd=t.getAttribute("data-sortdir"+ci)||"asc", nd=(cd==="asc")?"desc":"asc"; t.setAttribute("data-sortdir"+ci,nd);
+  rows.sort((a,b)=>{
+    let x=a.cells[ci].textContent.trim(), y=b.cells[ci].textContent.trim();
+    if(num){x=parseFloat(x.replace(/[^\d.]/g,""))||0; y=parseFloat(y.replace(/[^\d.]/g,""))||0;}
+    else{x=x.toLowerCase(); y=y.toLowerCase();}
+    if(nd==="asc")return x>y?1:x<y?-1:0; else return x<y?1:x>y?-1:0;
+  });
+  rows.forEach(r=>tb.appendChild(r));
+}
+
+/* Cursed table search */
+function searchSimple(inId,tId){
+  const q=document.getElementById(inId).value.toLowerCase(), tab=document.getElementById(tId);
+  if(!tab)return; let rows=tab.querySelectorAll("tbody tr");
+  rows.forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(q)?"":"none";});
+}
+
+/* Default sort + scroll check */
+window.addEventListener('load',()=>{
+  const t=document.getElementById('ghostTable');
+  if(t){ t.setAttribute('data-sortdir0','desc'); sortGhostTable(0,false); }
+  checkScroll();
+});
+window.addEventListener('resize',checkScroll);
+function checkScroll(){
+  if(window.innerWidth<=768){document.body.style.overflowY='auto';return;}
+  if(document.body.scrollHeight>window.innerHeight)document.body.style.overflowY='auto';else document.body.style.overflowY='hidden';
+}
+
+/* Random jagged slash */
+function genPath(w,h,dxMin,dxMax){
+  let x=0,y=(Math.random()*h).toFixed(1),path=`M0,${y}`;
+  while(x<w){let dx=dxMin+Math.random()*(dxMax-dxMin);x+=dx;if(x>w)x=w;y=(Math.random()*h).toFixed(1);path+=` L${x.toFixed(1)},${y}`;}
+  return path;
+}
+function genSlashSVG(w,h,dxMin,dxMax,col="#800",sw=3){
+  const d=genPath(w,h,dxMin,dxMax);
+  let svg=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+             <path d="${d}" stroke="${col}" fill="none" stroke-width="${sw}" stroke-linecap="butt" stroke-linejoin="miter"/>
+           </svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}
+function applySlash(r){ let url=genSlashSVG(600,12,2,10,"#800",3); r.style.setProperty("--randomSlash",`url("${url}")`); }
+
+/* Double-click to rule out */
+let hideRuled=false, ghostTBody=document.querySelector('#ghostTable tbody');
+if(ghostTBody){
+  ghostTBody.querySelectorAll('tr').forEach(r=>{
+    r.addEventListener('dblclick',()=>{
+      r.classList.toggle('ruled-out');
+      if(r.classList.contains('ruled-out')) applySlash(r); else r.style.removeProperty("--randomSlash");
+      if(hideRuled) r.style.display=r.classList.contains('ruled-out')?"none":"";
+    });
+  });
+}
+
+/* Hide/Show ruled out */
+function toggleHideRuledOut(){
+  hideRuled=!hideRuled;
+  let btn=document.getElementById('hideButton'), ruled=document.querySelectorAll('#ghostTable tbody tr.ruled-out');
+  if(hideRuled){ruled.forEach(r=>r.style.display="none");btn.textContent="Show Ruled Out";}
+  else{ruled.forEach(r=>r.style.display="");btn.textContent="Hide Ruled Out";}
+}
 </script>
 </body>
 </html>
