@@ -5,34 +5,217 @@
   <meta charset="UTF-8" />
   <title>PhaCS</title>
   <style>
-    html,body{margin:0;padding:0;width:100%;position:relative;font-family:Arial,sans-serif;color:#fff;background:#000;}
-    .symbol-container{position:fixed;top:50%;left:50%;width:400px;height:400px;transform:translate(-50%,-50%);z-index:1;}
-    .rotateGroup{transform-box:fill-box;transform-origin:center;animation:spin 20s linear infinite;}
-    @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-    .blood-line{fill:none;stroke:#b00;stroke-width:10;stroke-linejoin:round;stroke-linecap:round;filter:blur(2px);animation:flame 5s infinite ease-in-out;}
-    @keyframes flame{0%{stroke:#b00;opacity:0;filter:blur(5px);}50%{stroke:#c00;opacity:1;filter:blur(2px);}100%{stroke:#b00;opacity:0;filter:blur(5px);}}
-    .embers{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;}
-    .ember{position:absolute;bottom:0;width:3px;height:3px;background:#c04000;border-radius:50%;opacity:0;}
-    .table-wrapper{position:relative;z-index:2;width:90%;max-width:1200px;margin:20px auto;padding:20px;background:rgba(0,0,0,0.4);border-radius:8px;}
-    .table-wrapper h1{text-align:center;margin-bottom:10px;color:#f00;text-shadow:0 0 5px #f00;}
-    .filters{text-align:center;margin-bottom:10px;}
-    .search-box input{width:60%;max-width:300px;padding:6px;border-radius:4px;border:1px solid #900;outline:none;background:#200;color:#fdd;}
-    .evidence-boxes{margin-top:5px;}
-    .toggle-ruled-btn{background:#400;color:#fff;border:1px solid #900;padding:6px 12px;margin-top:8px;border-radius:4px;cursor:pointer;font-weight:bold;text-shadow:0 0 2px #f00;display:inline-block;}
-    .toggle-ruled-btn:hover{background:#600;}
-    .red-table{width:100%;border-collapse:separate;border-spacing:0 6px;background:rgba(0,0,0,0.3);}
-    .red-table th,.red-table td{border:none;padding:8px 10px;text-align:left;color:#fff;}
-    .red-table thead tr{background:#600;}
-    .red-table th{cursor:pointer;text-shadow:0 0 2px #f00;}
-    .red-table tbody tr{border-radius:6px;position:relative;}
-    .red-table tr:nth-child(even){background:rgba(200,0,0,0.2);}
-    .red-table tr:nth-child(odd){background:rgba(100,0,0,0.2);}
-    .red-table tr:hover td{background:rgba(255,0,0,0.2);}
-    .sortable::after{content:" \25B2\25BC";font-size:0.7em;color:#888;margin-left:5px;}
-    .ruled-out{background-color:#444!important;color:#aaa;}
-    .ruled-out:hover td{background:none!important;}
-    .ruled-out::after{content:"";position:absolute;left:0;top:50%;width:100%;height:12px;pointer-events:none;transform:translateY(-50%);background:var(--randomSlash) no-repeat center;background-size:100% 100%;opacity:0.8;}
-    @media(max-width:768px){.search-box input{width:90%;font-size:16px;padding:10px;}th,td{padding:6px;font-size:14px;}}
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      position: relative;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: #000;
+    }
+    .symbol-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      height: 400px;
+      transform: translate(-50%,-50%);
+      z-index: 1;
+    }
+    .rotateGroup {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: spin 20s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .blood-line {
+      fill: none;
+      stroke: #b00;
+      stroke-width: 10;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      filter: blur(2px);
+      animation: flame 5s infinite ease-in-out;
+    }
+    @keyframes flame {
+      0% { stroke: #b00; opacity: 0; filter: blur(5px); }
+      50% { stroke: #c00; opacity: 1; filter: blur(2px); }
+      100% { stroke: #b00; opacity: 0; filter: blur(5px); }
+    }
+    .embers {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ember {
+      position: absolute;
+      bottom: 0;
+      width: 3px;
+      height: 3px;
+      background: #c04000;
+      border-radius: 50%;
+      opacity: 0;
+    }
+    .table-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 8px;
+    }
+    .table-wrapper h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #f00;
+      text-shadow: 0 0 5px #f00;
+    }
+    .filters {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .search-box input {
+      width: 60%;
+      max-width: 300px;
+      padding: 6px;
+      border-radius: 4px;
+      border: 1px solid #900;
+      outline: none;
+      background: #200;
+      color: #fdd;
+    }
+    /* --- Evidence Slider Controls --- */
+    .evidence-buttons {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;  /* Changed from space-evenly */
+      align-items: center;
+      gap: 10px;  /* Added a small gap between toggles */
+    }
+    .slider-toggle {
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .slider-label {
+      font-size: 16px;
+      margin-bottom: 4px;
+      display: block;
+      text-align: center;
+    }
+    .slider-track {
+      width: 80px;
+      height: 30px;
+      background-color: #333; /* Neutral state */
+      border: 1px solid #900;
+      border-radius: 15px;
+      position: relative;
+      transition: background-color 0.3s, border 0.3s;
+      margin: 0 auto;
+    }
+    .slider-knob {
+      width: 26px;
+      height: 26px;
+      background: #b00; /* Red in neutral */
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 27px; /* Centered: (80-26)/2 */
+      transition: left 0.3s;
+    }
+    /* Found state: track turns blood red, knob moves right and becomes black */
+    .slider-toggle.found .slider-track {
+      background-color: #b00;
+      border: 1px solid #b00;
+    }
+    .slider-toggle.found .slider-knob {
+      left: 52px; /* 80 - 26 - 2 */
+      background: #000;
+    }
+    /* Not Detected state ("ruledout"): track turns black with red border, knob moves left and remains red */
+    .slider-toggle.ruledout .slider-track {
+      background-color: #000;
+      border: 1px solid #b00;
+    }
+    .slider-toggle.ruledout .slider-knob {
+      left: 2px;
+      background: #b00;
+    }
+    .toggle-ruled-btn {
+      background: #400;
+      color: #fff;
+      border: 1px solid #900;
+      padding: 6px 12px;
+      margin-top: 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      text-shadow: 0 0 2px #f00;
+      display: inline-block;
+    }
+    .toggle-ruled-btn:hover { background: #600; }
+    .red-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 6px;
+      background: rgba(0,0,0,0.3);
+    }
+    .red-table th, .red-table td {
+      border: none;
+      padding: 8px 10px;
+      text-align: left;
+      color: #fff;
+    }
+    .red-table thead tr { background: #600; }
+    .red-table th {
+      cursor: pointer;
+      text-shadow: 0 0 2px #f00;
+    }
+    .red-table tbody tr {
+      border-radius: 6px;
+      position: relative;
+    }
+    .red-table tr:nth-child(even) { background: rgba(200,0,0,0.2); }
+    .red-table tr:nth-child(odd) { background: rgba(100,0,0,0.2); }
+    .red-table tr:hover td { background: rgba(255,0,0,0.2); }
+    .sortable::after { content:" \25B2\25BC"; font-size:0.7em; color:#888; margin-left:5px; }
+    /* Original ruled-out (crossed-out) styling */
+    .ruled-out {
+      background-color: #444 !important;
+      color: #aaa;
+    }
+    .ruled-out:hover td { background: none !important; }
+    .ruled-out::after {
+      content:"";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 12px;
+      pointer-events: none;
+      transform: translateY(-50%);
+      background: var(--randomSlash) no-repeat center;
+      background-size: 100% 100%;
+      opacity: 0.8;
+    }
+    @media(max-width:768px) {
+      .search-box input { width: 90%; font-size:16px; padding:10px; }
+      th, td { padding:6px; font-size:14px; }
+      .slider-track { width: 70px; height: 26px; }
+      .slider-knob { width: 22px; height: 22px; top: 2px; left: calc((70px - 22px) / 2); background: #b00; }
+      .slider-toggle.found .slider-knob { left: calc(70px - 22px - 2px); background: #000; }
+      .slider-toggle.ruledout .slider-knob { left: 2px; background: #b00; }
+    }
   </style>
 </head>
 <body>
@@ -54,13 +237,44 @@
       <div class="search-box">
         <input type="text" id="ghostSearch" placeholder="Search Ghosts..." onkeyup="filterAllGhosts()"/>
       </div>
-      <div class="evidence-boxes">
-        <label><input type="checkbox" value="D.O.T.S." onclick="filterAllGhosts()"/>D.O.T.S.</label>
-        <label><input type="checkbox" value="EMF" onclick="filterAllGhosts()"/>EMF</label>
-        <label><input type="checkbox" value="Freezing Temps" onclick="filterAllGhosts()"/>Freezing Temps</label>
-        <label><input type="checkbox" value="Ghost Orb" onclick="filterAllGhosts()"/>Ghost Orb</label>
-        <label><input type="checkbox" value="Ghost Writing" onclick="filterAllGhosts()"/>Ghost Writing</label>
-        <label><input type="checkbox" value="Spirit Box" onclick="filterAllGhosts()"/>Spirit Box</label>
+      <!-- Evidence slider toggle controls -->
+      <div class="evidence-buttons">
+        <div class="slider-toggle" data-evidence="D.O.T.S." data-state="neutral">
+          <span class="slider-label">D.O.T.S.</span>
+          <div class="slider-track">
+            <div class="slider-knob"></div>
+          </div>
+        </div>
+        <div class="slider-toggle" data-evidence="EMF" data-state="neutral">
+          <span class="slider-label">EMF</span>
+          <div class="slider-track">
+            <div class="slider-knob"></div>
+          </div>
+        </div>
+        <div class="slider-toggle" data-evidence="Freezing Temps" data-state="neutral">
+          <span class="slider-label">Freezing Temps</span>
+          <div class="slider-track">
+            <div class="slider-knob"></div>
+          </div>
+        </div>
+        <div class="slider-toggle" data-evidence="Ghost Orb" data-state="neutral">
+          <span class="slider-label">Ghost Orb</span>
+          <div class="slider-track">
+            <div class="slider-knob"></div>
+          </div>
+        </div>
+        <div class="slider-toggle" data-evidence="Ghost Writing" data-state="neutral">
+          <span class="slider-label">Ghost Writing</span>
+          <div class="slider-track">
+            <div class="slider-knob"></div>
+          </div>
+        </div>
+        <div class="slider-toggle" data-evidence="Spirit Box" data-state="neutral">
+          <span class="slider-label">Spirit Box</span>
+          <div class="slider-track">
+            <div class="slider-knob"></div>
+          </div>
+        </div>
       </div>
       <button id="hideButton" class="toggle-ruled-btn" onclick="toggleHideRuledOut()">Hide Ruled Out</button>
     </div>
@@ -78,7 +292,6 @@
           <th class="sortable" onclick="sortGhostTable(7,true)">Base</th>
           <th class="sortable" onclick="sortGhostTable(8,true)">Mod</th>
           <th class="sortable" onclick="sortGhostTable(9,true)">Hunt %</th>
-          <!-- NEW Keywords column -->
           <th>Keywords</th>
         </tr>
       </thead>
@@ -441,16 +654,11 @@
   <td>75% / 15% (declines over time)</td>
   <td></td>
 </tr>
-
       </tbody>
     </table>
   </div>
 
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Cursed Items Table -->
+  <!-- Cursed Items Table (unchanged) -->
   <div class="table-wrapper">
     <h1>Cursed Items Table</h1>
     <div class="search-box" style="text-align:center;">
@@ -459,8 +667,14 @@
     <table class="red-table" id="cursedTable">
       <thead>
         <tr>
-          <th>Map</th><th>Ouija Board</th><th>Music Box</th><th>Tarot Cards</th>
-          <th>Summoning Circle</th><th>Haunted Mirror</th><th>Voodoo Doll</th><th>Monkey Paw</th>
+          <th>Map</th>
+          <th>Ouija Board</th>
+          <th>Music Box</th>
+          <th>Tarot Cards</th>
+          <th>Summoning Circle</th>
+          <th>Haunted Mirror</th>
+          <th>Voodoo Doll</th>
+          <th>Monkey Paw</th>
         </tr>
       </thead>
       <tbody>
@@ -599,121 +813,248 @@
     </table>
   </div>
 
-<script>
-/* Draw circle+pentagram */
-const c=document.getElementById("circlePath"), s=document.getElementById("starPath");
-if(c&&s){let cl=c.getTotalLength(),sl=s.getTotalLength();
- c.style.strokeDasharray=cl; c.style.strokeDashoffset=cl;
- s.style.strokeDasharray=sl; s.style.strokeDashoffset=sl;
- drawPath(c,cl,2000,()=>drawPath(s,sl,3000));
-}
-function drawPath(el,total,dur,cb){
- let st=null;function step(t){if(!st)st=t;let p=t-st,f=Math.min(p/dur,1);
- el.style.strokeDashoffset=total*(1-f); if(f<1)requestAnimationFrame(step);else if(cb)cb();}
- requestAnimationFrame(step);
-}
+  <script>
+    // Normalize a string: remove punctuation and extra spaces, then lowercase.
+    function normalize(str) {
+      return str.replace(/[^\w\s]/g, "").toLowerCase();
+    }
 
-/* Embers */
-const emberC=document.getElementById("emberContainer");
-if(emberC){
- let i=0;function spawn(){i++;let e=document.createElement('div');e.className='ember';e.style.left=(Math.random()*100)+'%';
-  let mr=300+Math.random()*400,wc=0.5+Math.random()*1.5,amp=5+Math.random()*10,sg=Math.random()<0.5?1:-1,an='emberFloat'+i,se=document.createElement('style'),
-  kf=`@keyframes ${an}{`;
-  for(let n=0;n<=100;n+=2){
-    let frac=n/100,x=amp*sg*Math.sin(wc*2*Math.PI*frac), y=-mr*frac,op=1;
-    if(n<=10)op=n/10; else if(n>=90)op=1-(n-90)/10;
-    kf+=`${n}%{transform:translate(${x}px,${y}px);opacity:${op.toFixed(2)};} `;
-  }
-  kf+='}'; se.innerHTML=kf; document.head.appendChild(se);
-  e.style.animation=`${an} 5.5s linear forwards`;
-  e.addEventListener('animationend',()=>{if(e.parentNode)e.parentNode.removeChild(e);document.head.removeChild(se);});
-  emberC.appendChild(e);
- }
- setInterval(spawn,75);for(let z=0;z<25;z++)spawn();
-}
+    /* Draw circle + pentagram */
+    const c = document.getElementById("circlePath"),
+          s = document.getElementById("starPath");
+    if(c && s){
+      let cl = c.getTotalLength(), sl = s.getTotalLength();
+      c.style.strokeDasharray = cl;
+      c.style.strokeDashoffset = cl;
+      s.style.strokeDasharray = sl;
+      s.style.strokeDashoffset = sl;
+      drawPath(c, cl, 2000, () => drawPath(s, sl, 3000));
+    }
+    function drawPath(el, total, dur, cb){
+      let st = null;
+      function step(t){
+        if(!st) st = t;
+        let p = t - st,
+            f = Math.min(p/dur, 1);
+        el.style.strokeDashoffset = total*(1-f);
+        if(f < 1) requestAnimationFrame(step);
+        else if(cb) cb();
+      }
+      requestAnimationFrame(step);
+    }
 
-/* Filter ghosts */
-function filterAllGhosts(){
-  const q=document.getElementById("ghostSearch").value.toLowerCase(),
-  tab=document.getElementById("ghostTable"); if(!tab)return;
-  const rows=tab.querySelector("tbody").querySelectorAll("tr");
-  let cbs=document.querySelectorAll(".evidence-boxes input[type='checkbox']"),sel=[];
-  cbs.forEach(c=>{if(c.checked)sel.push(c.value.toLowerCase());});
-  rows.forEach(r=>{
-    r.style.display=""; let txt=r.textContent.toLowerCase();
-    if(q&&!txt.includes(q)){r.style.display="none";return;}
-    let fEv=r.cells[4].textContent.toLowerCase(), aEv=r.cells[5].textContent.toLowerCase();
-    for(let ev of sel)if(!fEv.includes(ev)&&!aEv.includes(ev)){r.style.display="none";break;}
-  });
-}
+    /* Embers */
+    const emberC = document.getElementById("emberContainer");
+    if(emberC){
+      let i = 0;
+      function spawn(){
+        i++;
+        let e = document.createElement('div');
+        e.className = 'ember';
+        e.style.left = (Math.random()*100)+'%';
+        let mr = 300 + Math.random()*400,
+            wc = 0.5 + Math.random()*1.5,
+            amp = 5 + Math.random()*10,
+            sg = Math.random() < 0.5 ? 1 : -1,
+            an = 'emberFloat' + i,
+            se = document.createElement('style'),
+            kf = `@keyframes ${an}{`;
+        for(let n = 0; n <= 100; n += 2){
+          let frac = n/100,
+              x = amp * sg * Math.sin(wc * 2 * Math.PI * frac),
+              y = -mr * frac,
+              op = 1;
+          if(n <= 10) op = n/10;
+          else if(n >= 90) op = 1 - (n-90)/10;
+          kf += `${n}%{transform:translate(${x}px,${y}px);opacity:${op.toFixed(2)};} `;
+        }
+        kf += '}';
+        se.innerHTML = kf;
+        document.head.appendChild(se);
+        e.style.animation = `${an} 5.5s linear forwards`;
+        e.addEventListener('animationend', () => {
+          if(e.parentNode) e.parentNode.removeChild(e);
+          document.head.removeChild(se);
+        });
+        emberC.appendChild(e);
+      }
+      setInterval(spawn, 75);
+      for(let z = 0; z < 25; z++) spawn();
+    }
 
-/* Sort ghosts (cols 0,4,6,7,8,9 remain correct) */
-function sortGhostTable(ci,num){
-  const t=document.getElementById("ghostTable"); if(!t)return;
-  const tb=t.querySelector("tbody"), rows=Array.from(tb.querySelectorAll("tr"));
-  let cd=t.getAttribute("data-sortdir"+ci)||"asc", nd=(cd==="asc")?"desc":"asc"; t.setAttribute("data-sortdir"+ci,nd);
-  rows.sort((a,b)=>{
-    let x=a.cells[ci].textContent.trim(), y=b.cells[ci].textContent.trim();
-    if(num){x=parseFloat(x.replace(/[^\d.]/g,""))||0; y=parseFloat(y.replace(/[^\d.]/g,""))||0;}
-    else{x=x.toLowerCase(); y=y.toLowerCase();}
-    if(nd==="asc")return x>y?1:x<y?-1:0; else return x<y?1:x>y?-1:0;
-  });
-  rows.forEach(r=>tb.appendChild(r));
-}
+    /* Filtering by search text */
+    function filterAllGhosts(){
+      const q = document.getElementById("ghostSearch").value.toLowerCase(),
+            rows = document.querySelectorAll("#ghostTable tbody tr");
+      rows.forEach(row => {
+        if(row.textContent.toLowerCase().includes(q)) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      });
+      updateGhostRows();
+    }
 
-/* Cursed table search */
-function searchSimple(inId,tId){
-  const q=document.getElementById(inId).value.toLowerCase(), tab=document.getElementById(tId);
-  if(!tab)return; let rows=tab.querySelectorAll("tbody tr");
-  rows.forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(q)?"":"none";});
-}
+    /* Sorting ghosts (cols 0,4,6,7,8,9) */
+    function sortGhostTable(ci, num){
+      const t = document.getElementById("ghostTable");
+      if(!t) return;
+      const tb = t.querySelector("tbody"),
+            rows = Array.from(tb.querySelectorAll("tr"));
+      let cd = t.getAttribute("data-sortdir"+ci) || "asc",
+          nd = (cd === "asc") ? "desc" : "asc";
+      t.setAttribute("data-sortdir"+ci, nd);
+      rows.sort((a, b) => {
+        let x = a.cells[ci].textContent.trim(),
+            y = b.cells[ci].textContent.trim();
+        if(num){
+          x = parseFloat(x.replace(/[^\d.]/g, "")) || 0;
+          y = parseFloat(y.replace(/[^\d.]/g, "")) || 0;
+        } else {
+          x = x.toLowerCase();
+          y = y.toLowerCase();
+        }
+        if(nd === "asc") return x > y ? 1 : x < y ? -1 : 0;
+        else return x < y ? 1 : x > y ? -1 : 0;
+      });
+      rows.forEach(r => tb.appendChild(r));
+    }
 
-/* Default sort + scroll check */
-window.addEventListener('load',()=>{
-  const t=document.getElementById('ghostTable');
-  if(t){ t.setAttribute('data-sortdir0','desc'); sortGhostTable(0,false); }
-  checkScroll();
-});
-window.addEventListener('resize',checkScroll);
-function checkScroll(){
-  if(window.innerWidth<=768){document.body.style.overflowY='auto';return;}
-  if(document.body.scrollHeight>window.innerHeight)document.body.style.overflowY='auto';else document.body.style.overflowY='hidden';
-}
+    /* Cursed table search */
+    function searchSimple(inId, tId){
+      const q = document.getElementById(inId).value.toLowerCase(),
+            tab = document.getElementById(tId);
+      if(!tab) return;
+      let rows = tab.querySelectorAll("tbody tr");
+      rows.forEach(r => {
+        r.style.display = r.textContent.toLowerCase().includes(q) ? "" : "none";
+      });
+    }
 
-/* Random jagged slash */
-function genPath(w,h,dxMin,dxMax){
-  let x=0,y=(Math.random()*h).toFixed(1),path=`M0,${y}`;
-  while(x<w){let dx=dxMin+Math.random()*(dxMax-dxMin);x+=dx;if(x>w)x=w;y=(Math.random()*h).toFixed(1);path+=` L${x.toFixed(1)},${y}`;}
-  return path;
-}
-function genSlashSVG(w,h,dxMin,dxMax,col="#800",sw=3){
-  const d=genPath(w,h,dxMin,dxMax);
-  let svg=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="${d}" stroke="${col}" fill="none" stroke-width="${sw}" stroke-linecap="butt" stroke-linejoin="miter"/>
-           </svg>`;
-  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
-}
-function applySlash(r){ let url=genSlashSVG(600,12,2,10,"#800",3); r.style.setProperty("--randomSlash",`url("${url}")`); }
+    /* Random jagged slash for ruled-out rows */
+    function genPath(w, h, dxMin, dxMax){
+      let x = 0,
+          y = (Math.random()*h).toFixed(1),
+          path = `M0,${y}`;
+      while(x < w){
+        let dx = dxMin + Math.random()*(dxMax-dxMin);
+        x += dx;
+        if(x > w) x = w;
+        y = (Math.random()*h).toFixed(1);
+        path += ` L${x.toFixed(1)},${y}`;
+      }
+      return path;
+    }
+    function genSlashSVG(w, h, dxMin, dxMax, col="#800", sw=3){
+      const d = genPath(w, h, dxMin, dxMax);
+      let svg = `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                   <path d="${d}" stroke="${col}" fill="none" stroke-width="${sw}" stroke-linecap="butt" stroke-linejoin="miter"/>
+                 </svg>`;
+      return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+    }
+    function applySlash(r){
+      let url = genSlashSVG(600, 12, 2, 10, "#800", 3);
+      r.style.setProperty("--randomSlash", `url("${url}")`);
+    }
 
-/* Double-click to rule out */
-let hideRuled=false, ghostTBody=document.querySelector('#ghostTable tbody');
-if(ghostTBody){
-  ghostTBody.querySelectorAll('tr').forEach(r=>{
-    r.addEventListener('dblclick',()=>{
-      r.classList.toggle('ruled-out');
-      if(r.classList.contains('ruled-out')) applySlash(r); else r.style.removeProperty("--randomSlash");
-      if(hideRuled) r.style.display=r.classList.contains('ruled-out')?"none":"";
+    /* Update ghost rows based on evidence slider states and manual toggling */
+    function updateGhostRows(){
+      const ghostRows = document.querySelectorAll('#ghostTable tbody tr');
+      // Remove evidence-based ruled-out styling from non-manually toggled rows
+      ghostRows.forEach(row => {
+        if(!row.classList.contains('manual-ruled')){
+          row.classList.remove("ruled-out");
+          row.style.removeProperty("--randomSlash");
+        }
+      });
+      const toggles = document.querySelectorAll('.slider-toggle');
+      ghostRows.forEach(row => {
+        if(!row.classList.contains('manual-ruled')){
+          // Normalize the combined evidence text from cells 4 and 5.
+          const rowText = normalize(row.cells[4].textContent + " " + row.cells[5].textContent);
+          toggles.forEach(toggle => {
+            const evidence = normalize(toggle.dataset.evidence);
+            const state = toggle.dataset.state; // "neutral", "found", or "ruledout"
+            if(state === "found") {
+              if(!rowText.includes(evidence)) row.classList.add("ruled-out");
+            } else if(state === "ruledout") {
+              if(rowText.includes(evidence)) row.classList.add("ruled-out");
+            }
+          });
+          if(row.classList.contains("ruled-out")){
+            applySlash(row);
+          }
+          // Apply hide rule based on the global hideRuled flag.
+          if(hideRuled && row.classList.contains("ruled-out")){
+            row.style.display = "none";
+          } else {
+            row.style.display = "";
+          }
+        }
+      });
+    }
+
+    /* Slider toggle logic: cycle through neutral -> found -> ruledout -> neutral */
+    document.querySelectorAll('.slider-toggle').forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        let currentState = toggle.dataset.state;
+        if(currentState === "neutral") {
+          toggle.dataset.state = "found";
+          toggle.classList.add("found");
+          toggle.classList.remove("ruledout");
+        } else if(currentState === "found") {
+          toggle.dataset.state = "ruledout";
+          toggle.classList.add("ruledout");
+          toggle.classList.remove("found");
+        } else if(currentState === "ruledout") {
+          toggle.dataset.state = "neutral";
+          toggle.classList.remove("ruledout");
+          toggle.classList.remove("found");
+        }
+        updateGhostRows();
+      });
     });
-  });
-}
 
-/* Hide/Show ruled out */
-function toggleHideRuledOut(){
-  hideRuled=!hideRuled;
-  let btn=document.getElementById('hideButton'), ruled=document.querySelectorAll('#ghostTable tbody tr.ruled-out');
-  if(hideRuled){ruled.forEach(r=>r.style.display="none");btn.textContent="Show Ruled Out";}
-  else{ruled.forEach(r=>r.style.display="");btn.textContent="Hide Ruled Out";}
-}
-</script>
+    /* Double-click on a ghost row toggles manual ruled-out state */
+    document.querySelector('#ghostTable tbody').addEventListener('dblclick', function(e){
+      let row = e.target.closest('tr');
+      if(row){
+        if(row.classList.contains('manual-ruled')){
+          row.classList.remove('manual-ruled');
+          row.classList.remove('ruled-out');
+          row.style.removeProperty("--randomSlash");
+        } else {
+          row.classList.add('manual-ruled');
+          row.classList.add('ruled-out');
+          applySlash(row);
+        }
+      }
+    });
+
+    /* Hide/Show ruled-out ghosts */
+    let hideRuled = false;
+    function toggleHideRuledOut(){
+      hideRuled = !hideRuled;
+      const btn = document.getElementById('hideButton');
+      btn.textContent = hideRuled ? "Show Ruled Out" : "Hide Ruled Out";
+      updateGhostRows();
+    }
+
+    /* Default sort + scroll check */
+    window.addEventListener('load', () => {
+      const t = document.getElementById('ghostTable');
+      if(t) { t.setAttribute('data-sortdir0','desc'); sortGhostTable(0,false); }
+      checkScroll();
+    });
+    window.addEventListener('resize', checkScroll);
+    function checkScroll(){
+      if(window.innerWidth <= 768) { document.body.style.overflowY = 'auto'; return; }
+      if(document.body.scrollHeight > window.innerHeight)
+        document.body.style.overflowY = 'auto';
+      else
+        document.body.style.overflowY = 'hidden';
+    }
+  </script>
 </body>
 </html>
